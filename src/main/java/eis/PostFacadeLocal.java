@@ -5,7 +5,7 @@
  */
 package eis;
 
-import domain.Tag;
+import domain.Post;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,20 +14,22 @@ import javax.ejb.Local;
  * @author abraham
  */
 @Local
-public interface TagFacadeLocal {
+public interface PostFacadeLocal {
 
-    void create(Tag tag);
+    void create(Post post);
 
-    void edit(Tag tag);
+    void edit(Post post);
 
-    void remove(Tag tag);
+    void remove(Post post);
 
-    Tag find(Object id);
+    Post find(Object id);
 
-    List<Tag> findAll();
+    List<Post> findAll();
 
-    List<Tag> findRange(int[] range);
+    List<Post> findRange(int[] range);
 
     int count();
+
+    public List<Post> findQuestionsByOwnerId(Integer ownerId);
     
 }

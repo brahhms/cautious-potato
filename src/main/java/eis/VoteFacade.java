@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package eis;
 
 import domain.Vote;
@@ -13,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class VoteFacade extends AbstractFacade<Vote> implements VoteFacadeLocal {
 
-    @PersistenceContext(unitName = "sv.com.tpi_CautiousPotato_war_1.0PU")
+    @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
 
     @Override

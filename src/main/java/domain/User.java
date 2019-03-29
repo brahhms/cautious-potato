@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -26,17 +27,15 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
+@Table(catalog = "QxA", schema = "",name = "User")
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
     , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
     , @NamedQuery(name = "User.findByCreationDate", query = "SELECT u FROM User u WHERE u.creationDate = :creationDate")
     , @NamedQuery(name = "User.findByDisplayName", query = "SELECT u FROM User u WHERE u.displayName = :displayName")
-    , @NamedQuery(name = "User.findByUpVotes", query = "SELECT u FROM User u WHERE u.upVotes = :upVotes")
-    , @NamedQuery(name = "User.findByDownVotes", query = "SELECT u FROM User u WHERE u.downVotes = :downVotes")
     , @NamedQuery(name = "User.findByProfileImageUrl", query = "SELECT u FROM User u WHERE u.profileImageUrl = :profileImageUrl")
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status")
-    , @NamedQuery(name = "User.findByLastAccessDate", query = "SELECT u FROM User u WHERE u.lastAccessDate = :lastAccessDate")
     , @NamedQuery(name = "User.findByReputation", query = "SELECT u FROM User u WHERE u.reputation = :reputation")})
 public class User implements Serializable {
 
@@ -45,16 +44,12 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     private String displayName;
-    private Integer upVotes;
-    private Integer downVotes;
     @Size(max = 512)
     private String profileImageUrl;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -62,22 +57,12 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 128)
     private String email;
-    @Basic(optional = false)
-    @NotNull
-    private int status;
-    @Basic(optional = false)
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date lastAccessDate;
+    private Integer status;
     private Integer reputation;
-    @OneToMany(mappedBy = "ownerUserId")
-    private List<Answer> answerList;
-    @OneToMany(mappedBy = "userId")
-    private List<Comment> commentList;
     @OneToMany(mappedBy = "userId")
     private List<Vote> voteList;
     @OneToMany(mappedBy = "ownerUserId")
-    private List<Question> questionList;
+    private List<Post> postList;
 
     public User() {
     }
@@ -86,13 +71,10 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, Date creationDate, String displayName, String email, int status, Date lastAccessDate) {
+    public User(Integer id, String displayName, String email) {
         this.id = id;
-        this.creationDate = creationDate;
         this.displayName = displayName;
         this.email = email;
-        this.status = status;
-        this.lastAccessDate = lastAccessDate;
     }
 
     public Integer getId() {
@@ -119,22 +101,6 @@ public class User implements Serializable {
         this.displayName = displayName;
     }
 
-    public Integer getUpVotes() {
-        return upVotes;
-    }
-
-    public void setUpVotes(Integer upVotes) {
-        this.upVotes = upVotes;
-    }
-
-    public Integer getDownVotes() {
-        return downVotes;
-    }
-
-    public void setDownVotes(Integer downVotes) {
-        this.downVotes = downVotes;
-    }
-
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
@@ -151,20 +117,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Date getLastAccessDate() {
-        return lastAccessDate;
-    }
-
-    public void setLastAccessDate(Date lastAccessDate) {
-        this.lastAccessDate = lastAccessDate;
     }
 
     public Integer getReputation() {
@@ -175,22 +133,6 @@ public class User implements Serializable {
         this.reputation = reputation;
     }
 
-    public List<Answer> getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
-    }
-
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
-
     public List<Vote> getVoteList() {
         return voteList;
     }
@@ -199,12 +141,12 @@ public class User implements Serializable {
         this.voteList = voteList;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
+    public List<Post> getPostList() {
+        return postList;
     }
 
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
     }
 
     @Override

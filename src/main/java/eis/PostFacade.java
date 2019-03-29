@@ -5,7 +5,8 @@
  */
 package eis;
 
-import domain.TagSynonym;
+import domain.Post;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author abraham
  */
 @Stateless
-public class TagSynonymFacade extends AbstractFacade<TagSynonym> implements TagSynonymFacadeLocal {
+public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal {
 
     @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
@@ -25,8 +26,13 @@ public class TagSynonymFacade extends AbstractFacade<TagSynonym> implements TagS
         return em;
     }
 
-    public TagSynonymFacade() {
-        super(TagSynonym.class);
+    public PostFacade() {
+        super(Post.class);
+    }
+
+    @Override
+    public List<Post> findQuestionsByOwnerId(Integer ownerId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

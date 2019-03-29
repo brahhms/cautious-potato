@@ -1,7 +1,7 @@
 package unitTest;
 
-import domain.Answer;
-import eis.AnswerFacade;
+import domain.Post;
+import eis.PostFacade;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -19,20 +19,20 @@ import org.mockito.runners.MockitoJUnitRunner;
  * @author abraham
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AnswerFacadeTest extends AbstractTestFacade<Answer> {
+public class PostFacadeTest extends AbstractTestFacade<Post> {
 
     @InjectMocks
-    private AnswerFacade answerFacade;
+    private PostFacade postFacade;
 
-    List<Answer> ls;
-    Answer answer;
+    List<Post> ls;
+    Post post;
 
-    public AnswerFacadeTest() {
-        super(Answer.class);
-        this.answer = new Answer(1);
+    public PostFacadeTest() {
+        super(Post.class);
+        this.post = new Post(1);
         this.ls = new ArrayList<>();
-        this.ls.add(answer);
-        this.ls.add(new Answer());
+        this.ls.add(post);
+        this.ls.add(new Post());
     }
 
     @Before
@@ -43,7 +43,7 @@ public class AnswerFacadeTest extends AbstractTestFacade<Answer> {
     @Test
     public void testRange() {
         mockResult(ls);
-        List<Answer> result = answerFacade.findRange(new int[2]);
+        List<Post> result = postFacade.findRange(new int[2]);
 
         assertEquals(ls, result);
     }
@@ -51,7 +51,7 @@ public class AnswerFacadeTest extends AbstractTestFacade<Answer> {
     @Test
     public void testFindAll() {
         mockResult(ls);
-        List<Answer> result = answerFacade.findAll();
+        List<Post> result = postFacade.findAll();
 
         assertNotNull(result);
         assertEquals(ls, result);
@@ -59,38 +59,38 @@ public class AnswerFacadeTest extends AbstractTestFacade<Answer> {
 
     @Test
     public void testCreate() {
-        answerFacade.create(answer);
-        verify(getEm(), times(1)).persist(answer);
+        postFacade.create(post);
+        verify(getEm(), times(1)).persist(post);
 
     }
 
     @Test
     public void testEdit() {
-        answerFacade.edit(answer);
-        verify(getEm(), times(1)).merge(answer);
+        postFacade.edit(post);
+        verify(getEm(), times(1)).merge(post);
 
     }
 
     @Test
     public void testRemove() {
-        answerFacade.remove(answer);
-        verify(getEm(), times(1)).remove(getEm().merge(answer));
+        postFacade.remove(post);
+        verify(getEm(), times(1)).remove(getEm().merge(post));
 
     }
 
     @Test
     public void testFind() {
-        mockResult(answer);
-        Answer result = answerFacade.find(answer.getId());
+        mockResult(post);
+        Post result = postFacade.find(post.getId());
 
         System.out.println(result.toString());
-        assertEquals(answer, result);
+        assertEquals(post, result);
     }
 
     @Test
     public void testCount() {
         mockResult(5L);
-        int result = answerFacade.count();
+        int result = postFacade.count();
 
         assertNotNull(result);
     }

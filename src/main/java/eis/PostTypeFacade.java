@@ -5,7 +5,7 @@
  */
 package eis;
 
-import domain.TagSynonym;
+import domain.PostType;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author abraham
  */
 @Stateless
-public class TagSynonymFacade extends AbstractFacade<TagSynonym> implements TagSynonymFacadeLocal {
+public class PostTypeFacade extends AbstractFacade<PostType> implements PostTypeFacadeLocal {
 
     @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class TagSynonymFacade extends AbstractFacade<TagSynonym> implements TagS
         return em;
     }
 
-    public TagSynonymFacade() {
-        super(TagSynonym.class);
+    public PostTypeFacade() {
+        super(PostType.class);
     }
     
 }

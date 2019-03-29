@@ -6,7 +6,6 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,21 +15,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 
 /**
  *
  * @author abraham
  */
 @Entity
+@Table(catalog = "QxA", schema = "",name = "Vote")
 @NamedQueries({
     @NamedQuery(name = "Vote.findAll", query = "SELECT v FROM Vote v")
-    , @NamedQuery(name = "Vote.findById", query = "SELECT v FROM Vote v WHERE v.id = :id")
-    , @NamedQuery(name = "Vote.findByPostId", query = "SELECT v FROM Vote v WHERE v.postId = :postId")
-    , @NamedQuery(name = "Vote.findByCreationDate", query = "SELECT v FROM Vote v WHERE v.creationDate = :creationDate")
-    , @NamedQuery(name = "Vote.findByBountyAmount", query = "SELECT v FROM Vote v WHERE v.bountyAmount = :bountyAmount")})
+    , @NamedQuery(name = "Vote.findById", query = "SELECT v FROM Vote v WHERE v.id = :id")})
 public class Vote implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,14 +33,9 @@ public class Vote implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    private int postId;
-    @Basic(optional = false)
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
-    private Integer bountyAmount;
+    @JoinColumn(name = "postId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Post postId;
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @ManyToOne
     private User userId;
@@ -60,12 +50,6 @@ public class Vote implements Serializable {
         this.id = id;
     }
 
-    public Vote(Integer id, int postId, Date creationDate) {
-        this.id = id;
-        this.postId = postId;
-        this.creationDate = creationDate;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -74,28 +58,12 @@ public class Vote implements Serializable {
         this.id = id;
     }
 
-    public int getPostId() {
+    public Post getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
+    public void setPostId(Post postId) {
         this.postId = postId;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Integer getBountyAmount() {
-        return bountyAmount;
-    }
-
-    public void setBountyAmount(Integer bountyAmount) {
-        this.bountyAmount = bountyAmount;
     }
 
     public User getUserId() {

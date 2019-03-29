@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -22,6 +24,7 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
+@Table(catalog = "QxA", schema = "",name = "TagSynonym")
 @NamedQueries({
     @NamedQuery(name = "TagSynonym.findAll", query = "SELECT t FROM TagSynonym t")
     , @NamedQuery(name = "TagSynonym.findById", query = "SELECT t FROM TagSynonym t WHERE t.id = :id")
@@ -33,7 +36,9 @@ public class TagSynonym implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     private String tagSynonym;
     @JoinColumn(name = "tagId", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -44,6 +49,11 @@ public class TagSynonym implements Serializable {
 
     public TagSynonym(Integer id) {
         this.id = id;
+    }
+
+    public TagSynonym(Integer id, String tagSynonym) {
+        this.id = id;
+        this.tagSynonym = tagSynonym;
     }
 
     public Integer getId() {

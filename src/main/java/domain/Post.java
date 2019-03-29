@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -32,28 +32,26 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
+@Table(catalog = "QxA", schema = "",name = "Post")
 @NamedQueries({
-    @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q")
-    , @NamedQuery(name = "Question.findById", query = "SELECT q FROM Question q WHERE q.id = :id")
-    , @NamedQuery(name = "Question.findByCreationDate", query = "SELECT q FROM Question q WHERE q.creationDate = :creationDate")
-    , @NamedQuery(name = "Question.findByBody", query = "SELECT q FROM Question q WHERE q.body = :body")
-    , @NamedQuery(name = "Question.findByOwnerDisplayName", query = "SELECT q FROM Question q WHERE q.ownerDisplayName = :ownerDisplayName")
-    , @NamedQuery(name = "Question.findByTitle", query = "SELECT q FROM Question q WHERE q.title = :title")
-    , @NamedQuery(name = "Question.findByAnswerCount", query = "SELECT q FROM Question q WHERE q.answerCount = :answerCount")})
-public class Question implements Serializable {
+    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
+    , @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id")
+    , @NamedQuery(name = "Post.findByCreationDate", query = "SELECT p FROM Post p WHERE p.creationDate = :creationDate")
+    , @NamedQuery(name = "Post.findByBody", query = "SELECT p FROM Post p WHERE p.body = :body")
+    , @NamedQuery(name = "Post.findByOwnerDisplayName", query = "SELECT p FROM Post p WHERE p.ownerDisplayName = :ownerDisplayName")
+    , @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")})
+public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 1024)
+    @Size(min = 1, max = 2000)
     private String body;
     @Basic(optional = false)
     @NotNull
@@ -63,31 +61,39 @@ public class Question implements Serializable {
     @NotNull
     @Size(min = 1, max = 128)
     private String title;
-    private Integer answerCount;
-    @JoinTable(name = "QuestionTag", joinColumns = {
-        @JoinColumn(name = "questionId", referencedColumnName = "id")}, inverseJoinColumns = {
+    @JoinTable(name = "PostTag", joinColumns = {
+        @JoinColumn(name = "postId", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "tagId", referencedColumnName = "id")})
     @ManyToMany
     private List<Tag> tagList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentId")
-    private List<Answer> answerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "postId")
+    private List<Vote> voteList;
+    @OneToMany(mappedBy = "acceptedAnswerId")
+    private List<Post> postList;
     @JoinColumn(name = "acceptedAnswerId", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Answer acceptedAnswerId;
+    @ManyToOne
+    private Post acceptedAnswerId;
+    @OneToMany(mappedBy = "parentId")
+    private List<Post> postList1;
+    @JoinColumn(name = "parentId", referencedColumnName = "id")
+    @ManyToOne
+    private Post parentId;
+    @JoinColumn(name = "postTypeId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private PostType postTypeId;
     @JoinColumn(name = "ownerUserId", referencedColumnName = "id")
     @ManyToOne
     private User ownerUserId;
 
-    public Question() {
+    public Post() {
     }
 
-    public Question(Integer id) {
+    public Post(Integer id) {
         this.id = id;
     }
 
-    public Question(Integer id, Date creationDate, String body, String ownerDisplayName, String title) {
+    public Post(Integer id, String body, String ownerDisplayName, String title) {
         this.id = id;
-        this.creationDate = creationDate;
         this.body = body;
         this.ownerDisplayName = ownerDisplayName;
         this.title = title;
@@ -133,14 +139,6 @@ public class Question implements Serializable {
         this.title = title;
     }
 
-    public Integer getAnswerCount() {
-        return answerCount;
-    }
-
-    public void setAnswerCount(Integer answerCount) {
-        this.answerCount = answerCount;
-    }
-
     public List<Tag> getTagList() {
         return tagList;
     }
@@ -149,20 +147,52 @@ public class Question implements Serializable {
         this.tagList = tagList;
     }
 
-    public List<Answer> getAnswerList() {
-        return answerList;
+    public List<Vote> getVoteList() {
+        return voteList;
     }
 
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
+    public void setVoteList(List<Vote> voteList) {
+        this.voteList = voteList;
     }
 
-    public Answer getAcceptedAnswerId() {
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
+
+    public Post getAcceptedAnswerId() {
         return acceptedAnswerId;
     }
 
-    public void setAcceptedAnswerId(Answer acceptedAnswerId) {
+    public void setAcceptedAnswerId(Post acceptedAnswerId) {
         this.acceptedAnswerId = acceptedAnswerId;
+    }
+
+    public List<Post> getPostList1() {
+        return postList1;
+    }
+
+    public void setPostList1(List<Post> postList1) {
+        this.postList1 = postList1;
+    }
+
+    public Post getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Post parentId) {
+        this.parentId = parentId;
+    }
+
+    public PostType getPostTypeId() {
+        return postTypeId;
+    }
+
+    public void setPostTypeId(PostType postTypeId) {
+        this.postTypeId = postTypeId;
     }
 
     public User getOwnerUserId() {
@@ -183,10 +213,10 @@ public class Question implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Question)) {
+        if (!(object instanceof Post)) {
             return false;
         }
-        Question other = (Question) object;
+        Post other = (Post) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -195,7 +225,7 @@ public class Question implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Question[ id=" + id + " ]";
+        return "domain.Post[ id=" + id + " ]";
     }
     
 }

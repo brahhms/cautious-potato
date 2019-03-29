@@ -1,10 +1,15 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package eis;
 
 import domain.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -13,7 +18,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
 
-    @PersistenceContext(unitName = "sv.com.tpi_CautiousPotato_war_1.0PU")
+    @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
 
     @Override
@@ -24,5 +29,25 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     public UserFacade() {
         super(User.class);
     }
-    
+
+    @Override
+    public String findDisplayNameById(Integer id) {
+        User u = find(new User(id));
+        return u.getDisplayName();
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        TypedQuery tq = em.createNamedQuery("User.findByEmail", User.class)
+                .setParameter("email", email);
+        User u;
+        try {
+            u = (User) tq.getSingleResult();
+        } catch (javax.persistence.NoResultException e) {
+            return null;
+        }
+        return u;
+
+    }
+
 }
