@@ -57,8 +57,6 @@ public class Post implements Serializable {
     @NotNull
     @Size(min = 1, max = 45)
     private String ownerDisplayName;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 128)
     private String title;
     @JoinTable(name = "PostTag", joinColumns = {
@@ -98,6 +96,39 @@ public class Post implements Serializable {
         this.ownerDisplayName = ownerDisplayName;
         this.title = title;
     }
+
+    public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, User ownerUserId) {
+        this.id = id;
+        this.body = body;
+        this.ownerDisplayName = ownerDisplayName;
+        this.title = title;
+        this.tagList = tagList;
+        this.postTypeId = new PostType(1);
+        this.ownerUserId = ownerUserId;
+    }
+
+    public Post(Integer id, String body, String ownerDisplayName, String title, Post parentId, User ownerUserId) {
+        this.id = id;
+        this.body = body;
+        this.ownerDisplayName = ownerDisplayName;
+        this.title = title;
+        this.parentId = parentId;
+        this.postTypeId = new PostType(2);
+        this.ownerUserId = ownerUserId;
+    }
+
+    public Post(String body, String ownerDisplayName, Post parentId, User ownerUserId) {
+        this.body = body;
+        this.ownerDisplayName = ownerDisplayName;
+        this.parentId = parentId;
+        this.postTypeId = new PostType(3);
+        this.ownerUserId = ownerUserId;
+    }
+    
+    
+    
+    
+    
 
     public Integer getId() {
         return id;
@@ -225,7 +256,9 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Post[ id=" + id + " ]";
+        return "Post{" + "id=" + id + ", ownerDisplayName=" + ownerDisplayName + ", title=" + title + ", postTypeId=" + postTypeId + '}';
     }
+
+
     
 }

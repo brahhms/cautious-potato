@@ -33,10 +33,9 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
     , @NamedQuery(name = "User.findByCreationDate", query = "SELECT u FROM User u WHERE u.creationDate = :creationDate")
     , @NamedQuery(name = "User.findByDisplayName", query = "SELECT u FROM User u WHERE u.displayName = :displayName")
-    , @NamedQuery(name = "User.findByProfileImageUrl", query = "SELECT u FROM User u WHERE u.profileImageUrl = :profileImageUrl")
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status")
-    , @NamedQuery(name = "User.findByReputation", query = "SELECT u FROM User u WHERE u.reputation = :reputation")})
+   })
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -171,7 +170,11 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.User[ id=" + id + " ]";
+        return "User{" + "id=" + id + ", displayName=" + displayName + ", email=" + email + '}';
     }
+
+   
+
+
     
 }

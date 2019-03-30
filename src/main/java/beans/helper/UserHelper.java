@@ -17,15 +17,15 @@ import services.UserServiceImpl;
  */
 @Named
 @RequestScoped
-public class UserServiceBean implements Serializable{
+public class UserHelper implements Serializable{
     
     @Inject
-    UserService us;  
+    UserService userService;  
     private List<User> users;
 
     @PostConstruct
     public void init() {
-        users = us.getAllUsers();
+        users = userService.getAll();
     }
     
     public List<User> getUsers() {
@@ -36,12 +36,10 @@ public class UserServiceBean implements Serializable{
         this.users = users;
     }
 
-    public void setUs(UserServiceImpl us) {
-        this.us = us;
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
     }
 
 
-    
-    
     
 }
