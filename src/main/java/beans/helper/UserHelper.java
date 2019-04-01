@@ -25,7 +25,7 @@ public class UserHelper implements Serializable{
 
     @PostConstruct
     public void init() {
-        users = userService.getAll();
+        users = userService.getAllUsers();
     }
     
     public List<User> getUsers() {

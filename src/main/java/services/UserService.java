@@ -13,9 +13,9 @@ import javax.ejb.Local;
 @Local
 public interface UserService {
     
-    public List<User> getAll();
+    public List<User> getAllUsers();
     
-    public void create(UserBean user);
+    public void createUser(UserBean user);
     
     public boolean isActive(int id);
 
@@ -23,15 +23,15 @@ public interface UserService {
     
     public void decreaseReputacion(int id,int amount);
     
-    public User getById(int id);
+    public User getUserById(int id);
     
     public boolean exists(String email);
     
     public boolean exists(int id);
         
-    public void delete(int id);
+    public void deleteUser(int id);
     
-    public void update(UserBean user);
+    public void updateUser(UserBean user);
     
     
 }

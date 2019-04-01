@@ -97,6 +97,7 @@ public class Post implements Serializable {
         this.title = title;
     }
 
+    //question
     public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, User ownerUserId) {
         this.id = id;
         this.body = body;
@@ -107,6 +108,7 @@ public class Post implements Serializable {
         this.ownerUserId = ownerUserId;
     }
 
+    //answer
     public Post(Integer id, String body, String ownerDisplayName, String title, Post parentId, User ownerUserId) {
         this.id = id;
         this.body = body;
@@ -117,6 +119,7 @@ public class Post implements Serializable {
         this.ownerUserId = ownerUserId;
     }
 
+    //comment
     public Post(String body, String ownerDisplayName, Post parentId, User ownerUserId) {
         this.body = body;
         this.ownerDisplayName = ownerDisplayName;

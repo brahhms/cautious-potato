@@ -19,12 +19,12 @@ public class UserServiceImpl implements UserService {
     private UserFacadeLocal userFacade;
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return userFacade.findAll();
     }
 
     @Override
-    public void create(UserBean u) {
+    public void createUser(UserBean u) {
 
         User user = new User();
         user.setDisplayName(u.getDisplayName());
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(int id) {
+    public User getUserById(int id) {
         return userFacade.find(new User(id));
     }
 
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public void delete(int id) {
+    public void deleteUser(int id) {
         User user = new User(id);
         user.setDisplayName( userFacade.findDisplayNameById(id) );
         user.setStatus(0);
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserBean u) {
+    public void updateUser(UserBean u) {
         User user = userFacade.find(u.getId());
         user.setDisplayName(u.getDisplayName());
         user.setEmail(u.getEmail());

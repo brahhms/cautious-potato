@@ -1,45 +1,52 @@
-
 package beans.model;
 
-
 import domain.Post;
-import domain.Tag;
-import java.util.Date;
+import domain.PostType;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import services.QuestionService;
 
 /**
  *
  * @author abraham
  */
 @Named
+@RequestScoped
 public class QuestionBean {
-    private String title;
+
+    @Inject
+    QuestionService questionService;
+
+    private int id ;
     private String body;
-    private Date creationDate;
-    private Integer ownerId;
-    private String ownerName;
-    private Integer acceptedAnswerId;
-    private List<Tag> tagList;
-    private List<Post> answersList;
+    private String ownerDisplayName;
+    private String title;
+    private List<Post> tagList;
+    private final int postTypeId = 1;
+    private String ownerUserId;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public QuestionBean() {
-    }
-
-    public QuestionBean(String title, String body, Integer ownerId, List<Tag> tagList) {
-        this.title = title;
+    public QuestionBean(int id, String body, String ownerDisplayName, String title, List<Post> tagList, String ownerUserId) {
+        this.id = id;
         this.body = body;
-        this.ownerId = ownerId;
+        this.ownerDisplayName = ownerDisplayName;
+        this.title = title;
         this.tagList = tagList;
+        this.ownerUserId = ownerUserId;
+    }
+    
+
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
-  
-    public void setTitle(String title) {
-        this.title = title;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBody() {
@@ -50,55 +57,38 @@ public class QuestionBean {
         this.body = body;
     }
 
-
-    public Integer getOwnerId() {
-        return ownerId;
+    public String getOwnerDisplayName() {
+        return ownerDisplayName;
     }
 
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
+    public void setOwnerDisplayName(String ownerDisplayName) {
+        this.ownerDisplayName = ownerDisplayName;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Integer getAcceptedAnswerId() {
-        return acceptedAnswerId;
-    }
-
-    public void setAcceptedAnswerId(Integer acceptedAnswerId) {
-        this.acceptedAnswerId = acceptedAnswerId;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public List<Tag> getTagList() {
+    public List<Post> getTagList() {
         return tagList;
     }
 
-    public void setTagList(List<Tag> tagList) {
+    public void setTagList(List<Post> tagList) {
         this.tagList = tagList;
     }
 
-    public List<Post> getAnswersList() {
-        return answersList;
+    public String getOwnerUserId() {
+        return ownerUserId;
     }
 
-    public void setAnswersList(List<Post> answersList) {
-        this.answersList = answersList;
+    public void setOwnerUserId(String ownerUserId) {
+        this.ownerUserId = ownerUserId;
     }
     
     
-    
+
 }

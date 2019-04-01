@@ -1,5 +1,7 @@
 package services;
 
+import domain.Post;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -9,5 +11,10 @@ import javax.ejb.Local;
 @Local
 public interface QuestionService {
 
+    public List<Post> getAllQuestions();
+    
+    public void createQuestion();
+    
+    public void deleteQuestion();
     
 }
