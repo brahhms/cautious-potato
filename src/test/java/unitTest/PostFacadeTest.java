@@ -1,6 +1,8 @@
 package unitTest;
 
 import domain.Post;
+import domain.Tag;
+import domain.User;
 import eis.PostFacade;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,7 @@ public class PostFacadeTest extends AbstractTestFacade<Post> {
     public PostFacadeTest() {
         super(Post.class);
         this.post = new Post(1);
-        this.ls = new ArrayList<>();
-        this.ls.add(post);
-        this.ls.add(new Post());
+        this.buildLs();
     }
 
     @Before
@@ -63,6 +63,7 @@ public class PostFacadeTest extends AbstractTestFacade<Post> {
         verify(getEm(), times(1)).persist(post);
 
     }
+    
 
     @Test
     public void testEdit() {
@@ -93,6 +94,20 @@ public class PostFacadeTest extends AbstractTestFacade<Post> {
         int result = postFacade.count();
 
         assertNotNull(result);
+    }
+    
+    //arreglarlo con patron build
+    private void buildLs(){
+        this.ls = new ArrayList<>();
+        List<Tag> tags = new ArrayList<>();
+        tags.add(new Tag(1));
+        this.ls.add(post);
+        //question
+        this.ls.add(new Post(2, "loremipsum", "tomato", "loremipsumtitle2", tags, new User(1)));
+        //answer
+        this.ls.add(new Post(3,"loremipsum", "cucumber", "loremipsumtitle3", new Post(2), new User(1)));
+        //comment
+        this.ls.add(new Post("loremipsum", "potato", new Post(3), new User(1)));
     }
     
 }

@@ -162,8 +162,10 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + getId() + ", creationDate=" + getCreationDate() + ", displayName=" + getDisplayName() + ", profileImageUrl=" + getProfileImageUrl() + ", email=" + getEmail() + ", status=" + getStatus() + ", reputation=" + getReputation() + '}';
+        return "User{" + "id=" + getId() + ", creationDate=" + getCreationDate() + ", displayName=" + getDisplayName() + ", profileImageUrl=" + getProfileImageUrl() + ", email=" + getEmail() + ", status=" + getStatus() + ", reputation=" + getReputation() + ", voteList=" + getVoteList() + ", postList=" + getPostList() + '}';
     }
+
+
 
 
    

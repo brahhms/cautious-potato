@@ -41,13 +41,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isActive(int id) {
-        User user = userFacade.find(new User(id));
+        User user = userFacade.find(id);
         return user.getStatus() == 1;
     }
 
     @Override
     public void increaseReputation(int id, int amount) {
-        User user = userFacade.find(new User(id));
+        User user = userFacade.find(id);
         user.setReputation(
                 user.getReputation() + amount);
         userFacade.edit(user);

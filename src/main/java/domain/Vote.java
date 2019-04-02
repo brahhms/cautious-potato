@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package domain;
 
 import java.io.Serializable;
@@ -106,6 +102,7 @@ public class Vote implements Serializable {
     public String toString() {
         return "Vote{" + "id=" + getId() + ", postId=" + getPostId() + ", userId=" + getUserId() + ", voteTypeId=" + getVoteTypeId() + '}';
     }
+
 
     
 

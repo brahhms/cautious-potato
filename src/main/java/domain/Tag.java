@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package domain;
 
 import java.io.Serializable;
@@ -113,7 +109,9 @@ public class Tag implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Tag[ id=" + id + " ]";
+        return "Tag{" + "id=" + getId() + ", name=" + getName() + ", postList=" + getPostList() + ", tagSynonymList=" + getTagSynonymList() + '}';
     }
+
+
     
 }

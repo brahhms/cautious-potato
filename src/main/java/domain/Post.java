@@ -86,12 +86,6 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public Post(Integer id, String body, String ownerDisplayName, String title) {
-        this.id = id;
-        this.body = body;
-        this.ownerDisplayName = ownerDisplayName;
-        this.title = title;
-    }
 
     //question
     public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, User ownerUserId) {

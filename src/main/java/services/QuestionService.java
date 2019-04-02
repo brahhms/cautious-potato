@@ -1,6 +1,7 @@
 package services;
 
 import domain.Post;
+import eis.PostFacade;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -17,4 +18,5 @@ public interface QuestionService {
     
     public void deleteQuestion();
     
+    public void setPostFacade(PostFacade postFacade);
 }
