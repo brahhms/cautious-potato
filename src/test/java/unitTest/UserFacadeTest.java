@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -29,7 +30,7 @@ public class UserFacadeTest extends AbstractTestFacade<User> {
 
     public UserFacadeTest() {
         super(User.class);
-        this.user = new User(1);
+        this.user = new User(1, "potato", "potato@gmail.com");
         this.ls = new ArrayList<>();
         this.ls.add(user);
         this.ls.add(new User());
@@ -80,7 +81,7 @@ public class UserFacadeTest extends AbstractTestFacade<User> {
 
     @Test
     public void testFind() {
-        mockResult(user);
+        mockFind(user);
         User result = userFacade.find(user.getId());
 
         System.out.println(result.toString());
@@ -93,6 +94,14 @@ public class UserFacadeTest extends AbstractTestFacade<User> {
         int result = userFacade.count();
 
         assertNotNull(result);
+    }
+    
+    @Test
+    public void findUserByEmail(){
+        mockResult(user);
+        User result = userFacade.findUserByEmail(user.getEmail());
+        assertNotNull(result);
+        assertEquals(user.getEmail(), result.getEmail());
     }
     
 }

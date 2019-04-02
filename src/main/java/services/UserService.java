@@ -3,6 +3,7 @@ package services;
 
 import beans.model.UserBean;
 import domain.User;
+import eis.UserFacade;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -23,8 +24,6 @@ public interface UserService {
     
     public void decreaseReputacion(int id,int amount);
     
-    public User getUserById(int id);
-    
     public boolean exists(String email);
     
     public boolean exists(int id);
@@ -33,5 +32,6 @@ public interface UserService {
     
     public void updateUser(UserBean user);
     
+    public void setUserFacade(UserFacade userFacade) ;
     
 }

@@ -1,6 +1,7 @@
 
 package beans.model;
 
+
 import javax.inject.Named;
 
 /**
@@ -21,10 +22,10 @@ public class UserBean {
  
     private String email;
 
-    
+ 
     public UserBean() {
     }
-
+     
     
     
     public Integer getId() {

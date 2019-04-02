@@ -30,8 +30,6 @@ public interface UserFacadeLocal {
 
     int count();
 
-    public String findDisplayNameById(Integer id);
-
     public User findUserByEmail(String email);
 
 }

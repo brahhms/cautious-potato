@@ -80,7 +80,7 @@ public class VoteFacadeTest extends AbstractTestFacade<Vote> {
 
     @Test
     public void testFind() {
-        mockResult(vote);
+        mockFind(vote);
         Vote result = voteFacade.find(vote.getId());
 
         System.out.println(result.toString());

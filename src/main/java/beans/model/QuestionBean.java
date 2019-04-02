@@ -1,7 +1,6 @@
 package beans.model;
 
 import domain.Post;
-import domain.PostType;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -24,8 +23,10 @@ public class QuestionBean {
     private String ownerDisplayName;
     private String title;
     private List<Post> tagList;
-    private final int postTypeId = 1;
     private String ownerUserId;
+
+    public QuestionBean() {
+    }
 
     public QuestionBean(int id, String body, String ownerDisplayName, String title, List<Post> tagList, String ownerUserId) {
         this.id = id;

@@ -1,6 +1,6 @@
-
 package beans.helper;
 
+import domain.Post;
 import domain.User;
 import java.io.Serializable;
 import java.util.List;
@@ -17,17 +17,17 @@ import services.UserServiceImpl;
  */
 @Named
 @RequestScoped
-public class UserHelper implements Serializable{
-    
+public class UserHelper implements Serializable {
+
     @Inject
-    UserService userService;  
+    UserService userService;
     private List<User> users;
 
     @PostConstruct
     public void init() {
         users = userService.getAllUsers();
     }
-    
+
     public List<User> getUsers() {
         return users;
     }
@@ -39,7 +39,6 @@ public class UserHelper implements Serializable{
     public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
     }
-
 
     
 }

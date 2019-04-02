@@ -6,7 +6,9 @@
 package eis;
 
 import domain.Post;
+import domain.User;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal {
+
 
     @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
@@ -30,9 +33,5 @@ public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal 
         super(Post.class);
     }
 
-    @Override
-    public List<Post> findQuestionsByOwnerId(Integer ownerId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+
 }

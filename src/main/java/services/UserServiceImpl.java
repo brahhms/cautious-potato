@@ -2,6 +2,7 @@ package services;
 
 import beans.model.UserBean;
 import domain.User;
+import eis.UserFacade;
 import eis.UserFacadeLocal;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -26,26 +27,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(UserBean u) {
 
-        User user = new User();
-        user.setDisplayName(u.getDisplayName());
-        user.setEmail(u.getEmail());
-        user.setProfileImageUrl(u.getProfileImageUrl());
-        userFacade.create(user);
-        
+        if (!exists(u.getDisplayName())) {
+            User user = new User();
+            user.setDisplayName(u.getDisplayName());
+            user.setEmail(u.getEmail());
+            user.setProfileImageUrl(u.getProfileImageUrl());
+            userFacade.create(user);
+        }else{
+            System.out.println("ya existe");
+        }
+
     }
 
     @Override
     public boolean isActive(int id) {
         User user = userFacade.find(new User(id));
-        return user.getStatus()==1 ;
+        return user.getStatus() == 1;
     }
-
 
     @Override
     public void increaseReputation(int id, int amount) {
         User user = userFacade.find(new User(id));
         user.setReputation(
-                user.getReputation()+amount); 
+                user.getReputation() + amount);
         userFacade.edit(user);
     }
 
@@ -53,13 +57,8 @@ public class UserServiceImpl implements UserService {
     public void decreaseReputacion(int id, int amount) {
         User user = userFacade.find(new User(id));
         user.setReputation(
-                user.getReputation()-amount); 
+                user.getReputation() - amount);
         userFacade.edit(user);
-    }
-
-    @Override
-    public User getUserById(int id) {
-        return userFacade.find(new User(id));
     }
 
     @Override
@@ -72,7 +71,7 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-        @Override
+    @Override
     public boolean exists(int id) {
         try {
             userFacade.find(new User(id));
@@ -81,11 +80,13 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
-    
+
     @Override
     public void deleteUser(int id) {
-        User user = new User(id);
-        user.setDisplayName( userFacade.findDisplayNameById(id) );
+        User user = userFacade.find(id);
+        user.setEmail("");
+        user.setProfileImageUrl("");
+        user.setReputation(0);
         user.setStatus(0);
         userFacade.edit(user);
     }
@@ -99,5 +100,12 @@ public class UserServiceImpl implements UserService {
         userFacade.edit(user);
     }
 
+    @Override
+    public void setUserFacade(UserFacade userFacade) {
+        this.userFacade = userFacade;
+    }
 
+    
+    
+    
 }

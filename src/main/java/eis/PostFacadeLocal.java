@@ -29,7 +29,5 @@ public interface PostFacadeLocal {
     List<Post> findRange(int[] range);
 
     int count();
-
-    public List<Post> findQuestionsByOwnerId(Integer ownerId);
     
 }

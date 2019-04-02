@@ -1,7 +1,7 @@
 package unitTest;
 
-import domain.VoteType;
-import eis.VoteTypeFacade;
+import domain.PostType;
+import eis.PostTypeFacade;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -19,20 +19,20 @@ import org.mockito.runners.MockitoJUnitRunner;
  * @author abraham
  */
 @RunWith(MockitoJUnitRunner.class)
-public class VoteTypeFacadeTest extends AbstractTestFacade<VoteType> {
+public class PostTypeFacadeTest extends AbstractTestFacade<PostType> {
 
     @InjectMocks
-    private VoteTypeFacade voteTypeFacade;
+    private PostTypeFacade postTypeFacade;
 
-    List<VoteType> ls;
-    VoteType voteType;
+    List<PostType> ls;
+    PostType postType;
 
-    public VoteTypeFacadeTest() {
-        super(VoteType.class);
-        this.voteType = new VoteType(1);
+    public PostTypeFacadeTest() {
+        super(PostType.class);
+        this.postType = new PostType(1);
         this.ls = new ArrayList<>();
-        this.ls.add(voteType);
-        this.ls.add(new VoteType());
+        this.ls.add(postType);
+        this.ls.add(new PostType());
     }
 
     @Before
@@ -43,7 +43,7 @@ public class VoteTypeFacadeTest extends AbstractTestFacade<VoteType> {
     @Test
     public void testRange() {
         mockResult(ls);
-        List<VoteType> result = voteTypeFacade.findRange(new int[2]);
+        List<PostType> result = postTypeFacade.findRange(new int[2]);
 
         assertEquals(ls, result);
     }
@@ -51,7 +51,7 @@ public class VoteTypeFacadeTest extends AbstractTestFacade<VoteType> {
     @Test
     public void testFindAll() {
         mockResult(ls);
-        List<VoteType> result = voteTypeFacade.findAll();
+        List<PostType> result = postTypeFacade.findAll();
 
         assertNotNull(result);
         assertEquals(ls, result);
@@ -59,38 +59,38 @@ public class VoteTypeFacadeTest extends AbstractTestFacade<VoteType> {
 
     @Test
     public void testCreate() {
-        voteTypeFacade.create(voteType);
-        verify(getEm(), times(1)).persist(voteType);
+        postTypeFacade.create(postType);
+        verify(getEm(), times(1)).persist(postType);
 
     }
 
     @Test
     public void testEdit() {
-        voteTypeFacade.edit(voteType);
-        verify(getEm(), times(1)).merge(voteType);
+        postTypeFacade.edit(postType);
+        verify(getEm(), times(1)).merge(postType);
 
     }
 
     @Test
     public void testRemove() {
-        voteTypeFacade.remove(voteType);
-        verify(getEm(), times(1)).remove(getEm().merge(voteType));
+        postTypeFacade.remove(postType);
+        verify(getEm(), times(1)).remove(getEm().merge(postType));
 
     }
 
     @Test
     public void testFind() {
-        mockFind(voteType);
-        VoteType result = voteTypeFacade.find(voteType.getId());
+        mockFind(postType);
+        PostType result = postTypeFacade.find(postType.getId());
 
         System.out.println(result.toString());
-        assertEquals(voteType, result);
+        assertEquals(postType, result);
     }
 
     @Test
     public void testCount() {
         mockResult(5L);
-        int result = voteTypeFacade.count();
+        int result = postTypeFacade.count();
 
         assertNotNull(result);
     }

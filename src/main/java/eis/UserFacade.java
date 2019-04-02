@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eis;
 
 import domain.User;
@@ -10,6 +5,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -31,23 +29,16 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     }
 
     @Override
-    public String findDisplayNameById(Integer id) {
-        User u = find(new User(id));
-        return u.getDisplayName();
-    }
-
-    @Override
     public User findUserByEmail(String email) {
-        TypedQuery tq = em.createNamedQuery("User.findByEmail", User.class)
-                .setParameter("email", email);
-        User u;
-        try {
-            u = (User) tq.getSingleResult();
-        } catch (javax.persistence.NoResultException e) {
-            return null;
-        }
-        return u;
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<User> fromUser = cq.from(User.class);
+        cq.select(fromUser)
+                .where(cb.equal(fromUser.get("email"),email ));
+
+        TypedQuery<User> tq = em.createQuery(cq);
+
+        return  tq.getSingleResult();
 
     }
-
 }

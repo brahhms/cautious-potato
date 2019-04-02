@@ -80,7 +80,7 @@ public class TagSynonymFacadeTest extends AbstractTestFacade<TagSynonym> {
 
     @Test
     public void testFind() {
-        mockResult(tagSynonym);
+        mockFind(tagSynonym);
         TagSynonym result = tagSynonymFacade.find(tagSynonym.getId());
 
         System.out.println(result.toString());

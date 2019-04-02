@@ -104,7 +104,9 @@ public class Vote implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Vote[ id=" + id + " ]";
+        return "Vote{" + "id=" + getId() + ", postId=" + getPostId() + ", userId=" + getUserId() + ", voteTypeId=" + getVoteTypeId() + '}';
     }
+
     
+
 }

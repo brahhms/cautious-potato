@@ -80,7 +80,7 @@ public class PostFacadeTest extends AbstractTestFacade<Post> {
 
     @Test
     public void testFind() {
-        mockResult(post);
+        mockFind(post);
         Post result = postFacade.find(post.getId());
 
         System.out.println(result.toString());

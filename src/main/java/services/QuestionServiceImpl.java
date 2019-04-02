@@ -2,7 +2,6 @@
 package services;
 
 import domain.Post;
-import eis.PostFacade;
 import eis.PostFacadeLocal;
 import java.util.List;
 import javax.ejb.Stateless;

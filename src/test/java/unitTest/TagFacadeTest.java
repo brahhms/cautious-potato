@@ -80,7 +80,7 @@ public class TagFacadeTest extends AbstractTestFacade<Tag> {
 
     @Test
     public void testFind() {
-        mockResult(tag);
+        mockFind(tag);
         Tag result = tagFacade.find(tag.getId());
 
         System.out.println(result.toString());
