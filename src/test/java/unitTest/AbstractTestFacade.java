@@ -5,11 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.mockito.Matchers;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 
 import org.mockito.Mock;
@@ -24,6 +20,7 @@ import static org.mockito.Mockito.when;
  */
 public abstract class AbstractTestFacade<T> {
 
+    //metodos abstractos que devuelvan el facade que necesito
     @Mock
     private EntityManager em;
     @Mock
@@ -73,8 +70,6 @@ public abstract class AbstractTestFacade<T> {
         when(cq.select(root)).thenReturn(cqAll);
         
         when(em.createQuery(cq)).thenReturn(tq);
-
-        //when(em.createNamedQuery(anyString(), eq(entityClass))).thenReturn(tq);
     }
 
 }

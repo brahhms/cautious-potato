@@ -1,7 +1,6 @@
 
 package services;
 
-import beans.model.UserBean;
 import domain.User;
 import eis.UserFacade;
 import java.util.List;
@@ -16,7 +15,7 @@ public interface UserService {
     
     public List<User> getAllUsers();
     
-    public void createUser(UserBean user);
+    public void createUser(User user);
     
     public boolean isActive(int id);
 
@@ -30,7 +29,7 @@ public interface UserService {
         
     public void deleteUser(int id);
     
-    public void updateUser(UserBean user);
+    public void updateUser(User user);
     
     public void setUserFacade(UserFacade userFacade) ;
     

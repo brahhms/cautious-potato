@@ -249,7 +249,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "Post{" + "id=" + id + ", ownerDisplayName=" + ownerDisplayName + ", title=" + title + ", postTypeId=" + postTypeId + '}';
+        return "Post{" + "id=" + getId() + ", ownerDisplayName=" + getOwnerDisplayName() + ", title=" + getTitle() + ", postTypeId=" + postTypeId + '}';
     }
 
 

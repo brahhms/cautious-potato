@@ -6,9 +6,6 @@
 package eis;
 
 import domain.Post;
-import domain.User;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author abraham
  */
 @Stateless
-public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal {
+public class PostFacade extends AbstractFacade<Post>  {
 
 
     @PersistenceContext(unitName = "potatoPU")

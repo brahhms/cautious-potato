@@ -3,7 +3,6 @@ package services;
 
 import domain.Post;
 import eis.PostFacade;
-import eis.PostFacadeLocal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,7 +15,7 @@ import javax.inject.Inject;
 public class QuestionServiceImpl implements QuestionService{
     
     @Inject
-    PostFacadeLocal postFacade;
+    PostFacade postFacade;
     
 
     @Override
@@ -26,7 +25,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public void createQuestion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //
     }
 
     @Override

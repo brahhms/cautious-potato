@@ -47,6 +47,8 @@ public class PostFacadeTest extends AbstractTestFacade<Post> {
 
         assertEquals(ls, result);
     }
+    
+    
 
     @Test
     public void testFindAll() {

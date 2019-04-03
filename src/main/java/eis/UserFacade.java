@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
  * @author abraham
  */
 @Stateless
-public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
+public class UserFacade extends AbstractFacade<User> {
 
     @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
@@ -28,7 +28,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         super(User.class);
     }
 
-    @Override
+
     public User findUserByEmail(String email) {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

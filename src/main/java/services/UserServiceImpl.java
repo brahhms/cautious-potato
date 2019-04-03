@@ -1,9 +1,7 @@
 package services;
 
-import beans.model.UserBean;
 import domain.User;
 import eis.UserFacade;
-import eis.UserFacadeLocal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -17,7 +15,7 @@ import javax.persistence.NoResultException;
 public class UserServiceImpl implements UserService {
 
     @Inject
-    private UserFacadeLocal userFacade;
+    private UserFacade userFacade;
 
     @Override
     public List<User> getAllUsers() {
@@ -25,9 +23,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(UserBean u) {
+    public void createUser(User u) {
 
-        if (!exists(u.getDisplayName())) {
+        if (!exists(u.getEmail())) {
             User user = new User();
             user.setDisplayName(u.getDisplayName());
             user.setEmail(u.getEmail());
@@ -92,7 +90,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserBean u) {
+    public void updateUser(User u) {
         User user = userFacade.find(u.getId());
         user.setDisplayName(u.getDisplayName());
         user.setEmail(u.getEmail());
