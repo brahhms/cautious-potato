@@ -1,17 +1,10 @@
 package unitTest;
 
 import domain.Tag;
+import eis.AbstractFacade;
 import eis.TagFacade;
-import java.util.ArrayList;
-import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import org.mockito.runners.MockitoJUnitRunner;
 
 /**
@@ -24,75 +17,48 @@ public class TagFacadeTest extends AbstractTestFacade<Tag> {
     @InjectMocks
     private TagFacade tagFacade;
 
-    List<Tag> ls;
-    Tag tag;
+    @Override
+    public AbstractFacade facade() {
+        return tagFacade;
+    }
 
     public TagFacadeTest() {
-        super(Tag.class);
-        this.tag = new Tag(1);
-        this.ls = new ArrayList<>();
-        this.ls.add(tag);
-        this.ls.add(new Tag());
+        super(Tag.class, new Tag());
     }
 
-    @Before
-    public void setUp() {
-        mockQuery();
+    @Override
+    public void testFindRange() {
+        findRange();
     }
 
-    @Test
-    public void testRange() {
-        mockResult(ls);
-        List<Tag> result = tagFacade.findRange(new int[2]);
-
-        assertEquals(ls, result);
-    }
-
-    @Test
+    @Override
     public void testFindAll() {
-        mockResult(ls);
-        List<Tag> result = tagFacade.findAll();
-
-        assertNotNull(result);
-        assertEquals(ls, result);
+        findAll();
     }
 
-    @Test
+    @Override
     public void testCreate() {
-        tagFacade.create(tag);
-        verify(getEm(), times(1)).persist(tag);
-
+        create();
     }
 
-    @Test
+    @Override
     public void testEdit() {
-        tagFacade.edit(tag);
-        verify(getEm(), times(1)).merge(tag);
-
+        edit();
     }
 
-    @Test
+    @Override
     public void testRemove() {
-        tagFacade.remove(tag);
-        verify(getEm(), times(1)).remove(getEm().merge(tag));
-
+        remove();
     }
 
-    @Test
+    @Override
     public void testFind() {
-        mockFind(tag);
-        Tag result = tagFacade.find(tag.getId());
-
-        System.out.println(result.toString());
-        assertEquals(tag, result);
+        find();
     }
 
-    @Test
+    @Override
     public void testCount() {
-        mockResult(5L);
-        int result = tagFacade.count();
-
-        assertNotNull(result);
+        count();
     }
-    
+
 }
