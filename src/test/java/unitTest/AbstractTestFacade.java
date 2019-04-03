@@ -74,12 +74,19 @@ public abstract class AbstractTestFacade<T> {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Before
+    public void setUp() {
+        mockQuery();
+    }
+
+    @Test
     public void findRange() {
         mockResult(ls);
         List<T> result = facade().findRange(new int[2]);
         assertEquals(ls, result);
     }
 
+    @Test
     public void findAll() {
         mockResult(ls);
         List<T> result = facade().findAll();
@@ -87,21 +94,25 @@ public abstract class AbstractTestFacade<T> {
         assertEquals(ls, result);
     }
 
+    @Test
     public void create() {
         facade().create(entity);
         verify(em, times(1)).persist(entity);
     }
 
+    @Test
     public void edit() {
         facade().edit(entity);
         verify(em, times(1)).merge(entity);
     }
 
+    @Test
     public void remove() {
         facade().remove(entity);
         verify(em, times(1)).remove(em.merge(entity));
     }
 
+    @Test
     public void find() {
         when(em.find(eq(entityClass), Mockito.any(Integer.class))).thenReturn(entity);
         T result = (T) facade().find(1);
@@ -109,6 +120,7 @@ public abstract class AbstractTestFacade<T> {
         assertEquals(entity, result);
     }
 
+    @Test
     public void count() {
         mockResult(5L);
         int result = facade().count();
@@ -117,31 +129,5 @@ public abstract class AbstractTestFacade<T> {
 
     ///////////////////////////////////////////////////////////////////
     public abstract AbstractFacade facade();
-
-    @Before
-    public void setUp() {
-        mockQuery();
-    }
-
-    @Test
-    public abstract void testFindRange();
-
-    @Test
-    public abstract void testFindAll();
-
-    @Test
-    public abstract void testCreate();
-
-    @Test
-    public abstract void testEdit();
-
-    @Test
-    public abstract void testRemove();
-
-    @Test
-    public abstract void testFind();
-
-    @Test
-    public abstract void testCount();
 
 }

@@ -26,39 +26,4 @@ public class PostTypeFacadeTest extends AbstractTestFacade<PostType> {
         super(PostType.class, new PostType(1));
     }
 
-    @Override
-    public void testFindRange() {
-        findRange();
-    }
-
-    @Override
-    public void testFindAll() {
-        findAll();
-    }
-
-    @Override
-    public void testCreate() {
-        create();
-    }
-
-    @Override
-    public void testEdit() {
-        edit();
-    }
-
-    @Override
-    public void testRemove() {
-        remove();
-    }
-
-    @Override
-    public void testFind() {
-        find();
-    }
-
-    @Override
-    public void testCount() {
-        count();
-    }
-
 }
