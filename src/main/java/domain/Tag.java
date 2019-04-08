@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,10 +21,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "QxA", schema = "",name = "Tag")
-@NamedQueries({
-    @NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t")
-    , @NamedQuery(name = "Tag.findById", query = "SELECT t FROM Tag t WHERE t.id = :id")
-    , @NamedQuery(name = "Tag.findByName", query = "SELECT t FROM Tag t WHERE t.name = :name")})
 public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;

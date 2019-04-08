@@ -7,8 +7,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -20,10 +18,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "QxA", schema = "",name = "PostType")
-@NamedQueries({
-    @NamedQuery(name = "PostType.findAll", query = "SELECT p FROM PostType p")
-    , @NamedQuery(name = "PostType.findById", query = "SELECT p FROM PostType p WHERE p.id = :id")
-    , @NamedQuery(name = "PostType.findByName", query = "SELECT p FROM PostType p WHERE p.name = :name")})
 public class PostType implements Serializable {
 
     private static final long serialVersionUID = 1L;

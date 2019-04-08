@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.io.Serializable;
@@ -28,14 +27,7 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
-@Table(catalog = "QxA", schema = "",name = "Post")
-@NamedQueries({
-    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
-    , @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id")
-    , @NamedQuery(name = "Post.findByCreationDate", query = "SELECT p FROM Post p WHERE p.creationDate = :creationDate")
-    , @NamedQuery(name = "Post.findByBody", query = "SELECT p FROM Post p WHERE p.body = :body")
-    , @NamedQuery(name = "Post.findByOwnerDisplayName", query = "SELECT p FROM Post p WHERE p.ownerDisplayName = :ownerDisplayName")
-    , @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title")})
+@Table(catalog = "QxA", schema = "", name = "Post")
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -86,7 +78,6 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-
     //question
     public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, User ownerUserId) {
         this.id = id;
@@ -117,11 +108,6 @@ public class Post implements Serializable {
         this.postTypeId = new PostType(3);
         this.ownerUserId = ownerUserId;
     }
-    
-    
-    
-    
-    
 
     public Integer getId() {
         return id;
@@ -140,6 +126,14 @@ public class Post implements Serializable {
     }
 
     public String getBody() {
+        return body;
+    }
+
+    public String getBody(int end) {
+        try {
+            return body.substring(0, end).concat("...");
+        } catch (Exception e) {
+        }
         return body;
     }
 
@@ -252,6 +246,4 @@ public class Post implements Serializable {
         return "Post{" + "id=" + getId() + ", ownerDisplayName=" + getOwnerDisplayName() + ", title=" + getTitle() + ", postTypeId=" + postTypeId + '}';
     }
 
-
-    
 }

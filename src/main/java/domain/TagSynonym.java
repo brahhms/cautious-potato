@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,10 +19,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "QxA", schema = "",name = "TagSynonym")
-@NamedQueries({
-    @NamedQuery(name = "TagSynonym.findAll", query = "SELECT t FROM TagSynonym t")
-    , @NamedQuery(name = "TagSynonym.findById", query = "SELECT t FROM TagSynonym t WHERE t.id = :id")
-    , @NamedQuery(name = "TagSynonym.findByTagSynonym", query = "SELECT t FROM TagSynonym t WHERE t.tagSynonym = :tagSynonym")})
 public class TagSynonym implements Serializable {
 
     private static final long serialVersionUID = 1L;

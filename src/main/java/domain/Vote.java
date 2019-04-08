@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -19,9 +17,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(catalog = "QxA", schema = "",name = "Vote")
-@NamedQueries({
-    @NamedQuery(name = "Vote.findAll", query = "SELECT v FROM Vote v")
-    , @NamedQuery(name = "Vote.findById", query = "SELECT v FROM Vote v WHERE v.id = :id")})
 public class Vote implements Serializable {
 
     private static final long serialVersionUID = 1L;
