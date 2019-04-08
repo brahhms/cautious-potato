@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class DataGridView implements Serializable {
+public class QuestionsHelper implements Serializable {
 
     private List<Post> questions;
 
@@ -22,7 +22,8 @@ public class DataGridView implements Serializable {
 
     @PostConstruct
     public void init() {
-        questions = service.findAll();
+        //questionId = 1
+        questions = service.findPostByType(1);
     }
 
     public List<Post> getQuestions() {

@@ -3,31 +3,35 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./resources/plantilla.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
         <h:outputStylesheet name="css/cssLayout.css"/>
 
         <h:form id="form">
-            <p:dataGrid var="question" value="#{questionsHelper.questions}" columns="1" 
+            //pregunta
+            <p:panel header="#{questionHelper.question.title}">
+                <c:set var="question" value="#{questionHelper.question}" scope="request" />
+                <h:outputText value="#{question.body}" />
+            </p:panel>
+
+
+            //respuestas
+            <p:dataGrid var="answer" value="#{questionHelper.answers}" columns="1" 
                         rows="4" paginator="true" id="preguntas"         
                         rowsPerPageTemplate="2,4,8">
 
-                <p:panel header="#{question.title}">
+                <p:panel>
                     <h:panelGrid columns="2" class="question-panel">
 
                         <p:column rowspan="2">
-                            <h:outputText value="respuestas [10]"/>
                             <p:panel class="user-panel">
-                                formulada por: #{question.ownerDisplayName}
+                                formulada por: #{answer.ownerDisplayName}
                             </p:panel>
                         </p:column>
                         <p:column>
-                            <p:panel class="question-body">#{question.getBody(100)}</p:panel>
-                            <br/>
-                            <ui:repeat value="#{question.tagList}" var="tag">
-                                <span class="tag">#{tag.name}</span>
-                            </ui:repeat> 
+                            <p:panel class="question-body">#{answer.getBody(100)}</p:panel>
                         </p:column>
                     </h:panelGrid>
                 </p:panel>

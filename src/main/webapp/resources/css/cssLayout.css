@@ -23,3 +23,17 @@
     margin: 0px 170px 0px 170px;
 }
 
+.tag{
+    margin-right:8px;
+    background-color: #e1ecf4;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.user-panel{
+    background-color: #e1ecf4;
+    width: 140px;
+    margin-right: 20px;
+    font-size: 14px !important;
+}
+

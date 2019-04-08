@@ -28,6 +28,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(catalog = "QxA", schema = "", name = "Post")
+@NamedQueries({
+    @NamedQuery(name = "Post.findByParentId", query = "SELECT p FROM Post p WHERE p.parentId = :parentId"),
+    @NamedQuery(name = "Post.findByPostTypeId", query = "SELECT p FROM Post p WHERE p.postTypeId = :postTypeId")})
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
