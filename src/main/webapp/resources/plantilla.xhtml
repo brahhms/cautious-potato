@@ -12,16 +12,18 @@
     </h:head>
 
     <h:body>
+        <ui:insert name="metadata"/>
 
         <div id="left">
             <ui:insert name="left">
                 <h:link outcome="posts" value="Posts" />
                 <br/>
-                <h:link outcome="question" value="Pregunta" />
+                <h:link outcome="ask" value="Ask" />
                 <br/>
+    
             </ui:insert>
         </div>
-        <div id="content" class="left_content">
+        <div id="content" class="content">
             <ui:insert name="content">Content</ui:insert>
         </div>
 

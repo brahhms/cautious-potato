@@ -3,17 +3,17 @@ package beans.helper;
 
 import domain.Post;
 import eis.PostFacade;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@ViewScoped
-public class QuestionsHelper implements Serializable {
+@RequestScoped
+public class QuestionsHelper {
 
     private List<Post> questions;
 
@@ -27,6 +27,7 @@ public class QuestionsHelper implements Serializable {
     }
 
     public List<Post> getQuestions() {
+        questions = service.findPostByType(1);
         return questions;
     }
 

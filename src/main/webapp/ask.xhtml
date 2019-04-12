@@ -18,36 +18,12 @@
         <h:outputStylesheet name="css/cssLayout.css"/>
 
         <h:form id="form">
-            //pregunta
-            <p:panel header="#{questionHelper.question.title}">
-                <c:set var="question" value="#{questionHelper.question}" scope="request" />
-                <h:outputText value="#{question.body}" />
-            </p:panel>
+            <h3>Formular una pregunta</h3>
+            <p:outputLabel value="Titulo:" for="title" />
+            <p:inputText id="title"/>
 
-
-            //respuestas
-            <p:dataGrid id="answersLs" var="answer" value="#{questionHelper.question.postChildren}" columns="1" 
-                        rows="4" paginator="true"        
-                        rowsPerPageTemplate="2,4,8">
-
-                <p:panel>
-                    <h:panelGrid columns="2" class="question-panel">
-
-                        <p:column rowspan="2">
-                            <p:panel class="user-panel">
-                                formulada por: #{answer.ownerDisplayName}
-                            </p:panel>
-                        </p:column>
-                        <p:column>
-
-                            <h:outputText  escape="false" value="#{answer.getBody(100)}" />
-                        </p:column>
-                    </h:panelGrid>
-                </p:panel>
-            </p:dataGrid>
-
-            //tu respuesta
-            <p:textEditor height="200" placeholder="Enter your answer" value="#{questionHelper.answer.body}" >
+            <p:outputLabel value="Cuerpo:" for="body" />
+            <p:textEditor id="body" height="200" value="#{questionHelper.question.body}" >
                 <f:facet name="toolbar">
                     <span class="ql-formats">
                         <button class="ql-bold"></button>
@@ -62,8 +38,18 @@
                 </f:facet>
             </p:textEditor>
 
-            <p:commandButton value="Publica tu respuesta" action="#{questionHelper.newAnswer()}" update="answersLs" />
+            <p:outputLabel value="Etiquetas:" for="tags" />
 
+            
+            <p:autoComplete id="tags" multiple="true" value="#{questionHelper.question.tagList}" completeMethod="#{tagsHelpers.completeTag}"
+                            var="t" itemLabel="#{t.name}" itemValue="#{t.id}"  forceSelection="true">
+                <p:column>
+                    <h:outputText value="#{t.name}" />
+                </p:column>
+            </p:autoComplete>
+
+
+            <p:commandButton value="Publica tu respuesta" action="#{questionHelper.newAnswer()}"/>
 
         </h:form>
     </ui:define>

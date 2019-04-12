@@ -1,9 +1,17 @@
 body {
-    background-color: #ffffff;
     font-size: 12px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #000000;  
     margin: 10px;
+    background: rgba(224,224,224,1);
+    background: -moz-linear-gradient(left, rgba(224,224,224,1) 0%, rgba(246,246,246,1) 47%, rgba(221,221,221,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(224,224,224,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(221,221,221,1)));
+    background: -webkit-linear-gradient(left, rgba(224,224,224,1) 0%, rgba(246,246,246,1) 47%, rgba(221,221,221,1) 100%);
+    background: -o-linear-gradient(left, rgba(224,224,224,1) 0%, rgba(246,246,246,1) 47%, rgba(221,221,221,1) 100%);
+    background: -ms-linear-gradient(left, rgba(224,224,224,1) 0%, rgba(246,246,246,1) 47%, rgba(221,221,221,1) 100%);
+    background: linear-gradient(to right, rgba(224,224,224,1) 0%, rgba(246,246,246,1) 47%, rgba(221,221,221,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', endColorstr='#dddddd', GradientType=1 );
+
 }
 
 h1 {
@@ -17,13 +25,13 @@ h1 {
 }
 
 a:link, a:visited {
-  color: #045491;
-  font-weight : bold;
-  text-decoration: none;
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
 }
 
 a:link:hover, a:visited:hover  {
-  color: #045491;
-  font-weight : bold;
-  text-decoration : underline;
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
 }

@@ -63,7 +63,7 @@ public class Post implements Serializable {
     @ManyToOne
     private Post acceptedAnswerId;
     @OneToMany(mappedBy = "parentId")
-    private List<Post> postList1;
+    private List<Post> postChildren;
     @JoinColumn(name = "parentId", referencedColumnName = "id")
     @ManyToOne
     private Post parentId;
@@ -93,24 +93,15 @@ public class Post implements Serializable {
     }
 
     //answer
-    public Post(Integer id, String body, String ownerDisplayName, String title, Post parentId, User ownerUserId) {
-        this.id = id;
-        this.body = body;
-        this.ownerDisplayName = ownerDisplayName;
-        this.title = title;
-        this.parentId = parentId;
-        this.postTypeId = new PostType(2);
-        this.ownerUserId = ownerUserId;
+    //comment
+    //de momento no usado
+    public Post(Post parent,int postType) {
+        this.postTypeId = new PostType(postType);
+        this.parentId = parent;
     }
 
-    //comment
-    public Post(String body, String ownerDisplayName, Post parentId, User ownerUserId) {
-        this.body = body;
-        this.ownerDisplayName = ownerDisplayName;
-        this.parentId = parentId;
-        this.postTypeId = new PostType(3);
-        this.ownerUserId = ownerUserId;
-    }
+    
+    
 
     public Integer getId() {
         return id;
@@ -192,12 +183,12 @@ public class Post implements Serializable {
         this.acceptedAnswerId = acceptedAnswerId;
     }
 
-    public List<Post> getPostList1() {
-        return postList1;
+    public List<Post> getPostChildren() {
+        return postChildren;
     }
 
-    public void setPostList1(List<Post> postList1) {
-        this.postList1 = postList1;
+    public void setPostChildren(List<Post> postChildren) {
+        this.postChildren = postChildren;
     }
 
     public Post getParentId() {

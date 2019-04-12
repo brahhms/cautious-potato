@@ -11,17 +11,13 @@
     padding: 5px;
 }
 
-.left_content {
+.content {
     background-color: #dddddd;
-    padding: 5px;
+    padding: 10px 40px;
     margin-left: 170px;
 }
 
-.right_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 170px 0px 170px;
-}
+
 
 .tag{
     margin-right:8px;
@@ -37,3 +33,20 @@
     font-size: 14px !important;
 }
 
+
+
+.question-title{
+    width: 100%;
+}
+.question-title > a{
+    text-decoration: none !important;
+    
+}
+
+#form > input{
+    width: 100%;
+}
+
+.ui-autocomplete, .ui-autocomplete-multiple-container{
+    width: 100% !important;
+}
