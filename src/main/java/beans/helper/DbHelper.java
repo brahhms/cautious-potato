@@ -20,13 +20,12 @@ public class DbHelper implements Serializable{
     private List<String> entities;
     private EntityType<?> ent;
     private List records;
+    private String entityName; 
 
     
     @PostConstruct
     public void init() {
         entities = service.getTables();
-        ent = service.getEntity(entities.get(3));
-        records = service.findAll(ent.getJavaType());
     }
 
 
@@ -48,6 +47,16 @@ public class DbHelper implements Serializable{
 
     public void setRecords(List records) {
         this.records = records;
+    }
+
+    public String getEntityName() {
+        return entityName;
+    }
+
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
+        ent = service.getEntity(entityName);
+        records = service.findAll(ent.getJavaType());
     }
 
 
