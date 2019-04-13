@@ -18,14 +18,14 @@
         <h:outputStylesheet name="css/cssLayout.css"/>
 
         <h:form id="form">
-            //pregunta
+            
             <p:panel header="#{questionHelper.question.title}">
                 <c:set var="question" value="#{questionHelper.question}" scope="request" />
                 <h:outputText value="#{question.body}" />
             </p:panel>
 
 
-            //respuestas
+            
             <p:dataGrid id="answersLs" var="answer" value="#{questionHelper.question.postChildren}" columns="1" 
                         rows="4" paginator="true"        
                         rowsPerPageTemplate="2,4,8">
@@ -46,7 +46,7 @@
                 </p:panel>
             </p:dataGrid>
 
-            //tu respuesta
+          
             <p:textEditor height="200" placeholder="Enter your answer" value="#{questionHelper.answer.body}" >
                 <f:facet name="toolbar">
                     <span class="ql-formats">

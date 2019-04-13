@@ -6,26 +6,27 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="css/default.css"/>
-        <h:outputStylesheet name="css/cssLayout.css"/>
-        <title>Facelets Template</title>
+        <title>Tablas</title>
     </h:head>
 
     <h:body>
-        <ui:insert name="metadata"/>
 
         <div id="left">
             <ui:insert name="left">
-                <h:link outcome="posts" value="Posts" />
-                <br/>
-                <h:link outcome="ask" value="Ask" />
-                <br/>
-                <h:link outcome="tables" value="Mantenimiento" />
-                <br/>
+                <ul>
+                    <li>post</li>
+                    <li>user</li>
+                </ul>
+                <strong>entityNames: </strong>#{dbHelper.entities} <br/>
+                
             </ui:insert>
         </div>
-        <div id="content" class="content">
-            <ui:insert name="content">Content</ui:insert>
+
+
+        <div id="content">
+            <ui:insert name="content">
+                //datatable
+            </ui:insert>
         </div>
 
     </h:body>
