@@ -19,15 +19,15 @@ public class DBService {
 
     public List<String> getTables() {
         List<String> tables = new ArrayList<>();
-        for (EntityType<?> entity : em.getMetamodel().getEntities()) {
+        for (EntityType entity : em.getMetamodel().getEntities()) {
             tables.add(entity.getName());
         }
         return tables;
     }
 
-    public EntityType<?> getEntity(String entityName) {
+    public EntityType getEntity(String entityName) {
 
-        for (EntityType<?> entity : em.getMetamodel().getEntities()) {
+        for (EntityType entity : em.getMetamodel().getEntities()) {
             if (entity.getName().equals(entityName)) {
                 return entity;
             }

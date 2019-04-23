@@ -22,7 +22,7 @@ public class DbHelper implements Serializable {
     private DBService service;
     private List<String> entities;
 
-    private EntityType<?> ent;
+    private EntityType ent;
     private String entityName;
 
     private List records;
@@ -40,7 +40,7 @@ public class DbHelper implements Serializable {
         this.entities = entities;
     }
 
-    public EntityType<?> getEnt() {
+    public EntityType getEnt() {
         return ent;
     }
 

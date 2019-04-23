@@ -1,13 +1,12 @@
 package eis;
 
 import domain.User;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.mockito.internal.util.reflection.Whitebox;
+import org.junit.Rule;
 
 /**
  *
@@ -15,28 +14,28 @@ import org.mockito.internal.util.reflection.Whitebox;
  */
 public class UserFacadeIT {
 
-    EntityManager em;
-
-    UserFacade userFacade;
-
     public UserFacadeIT() {
-        em = Persistence.createEntityManagerFactory("potatoPU-test").createEntityManager();
-        this.userFacade = new UserFacade();
+    }
+    UserFacade userFacade = new UserFacade();
+    @Rule
+    public EntityManagerProvider emp = EntityManagerProvider.getInstance("potatoPU-test", userFacade);
+
+    public AbstractFacade facade() {
+        return emp.getFacade();
     }
 
     @Before
     public void setUp() {
-        Whitebox.setInternalState(userFacade, "em", em);
-        userFacade.getEntityManager().getTransaction().begin();
+        facade().getEntityManager().getTransaction().begin();
     }
 
     @Test
     public void testCreate() {
-        //verificar estado inicial
-        User user = new User();   
-        userFacade.create(user);
+        System.out.println("testCreate");
+        User user = new User();
+        facade().create(user);
 
-        List list = userFacade.findAll();
+        List list = facade().findAll();
         assertEquals(1, list.size());
         System.out.println(list.get(0).toString());
 
@@ -44,26 +43,50 @@ public class UserFacadeIT {
 
     @Test
     public void testDelete() {
-
+        System.out.println("testDelete");
         User user = new User();
         User user2 = new User(2);
 
-        userFacade.create(user);
-        userFacade.create(user2);
+        facade().create(user);
+        facade().create(user2);
+        facade().remove(user);
 
-        userFacade.remove(user);
-
-        assertEquals(user2, userFacade.find(2));
-
+        assertEquals(user2, facade().find(2));
     }
-    
+
     @Test
-    public void testFindUserByEmail(){
+    public void testEdit() {
+        System.out.println("testEdit");
+        User user = new User(26, "usuario", "correo@gmail.com");
+
+        facade().create(user);
+        User user2 = new User(26, "usuarioModificado", "correo@gmail.com");
+
+        facade().edit(user2);
+        assertEquals(user.getDisplayName(), user2.getDisplayName());
+    }
+
+    @Test
+    public void testFindAll() {
+        System.out.println("testFindAll");
+                
+        List<User> ls = new ArrayList<>();
+        ls.add(new User(26, "aaa", "abc@correo.com"));
+        ls.add(new User(25, "aab", "aab@correo.com"));
+        
+        for (User u : ls) {
+            facade().create(u);
+        }
+        assertEquals(ls, facade().findAll());
+    }
+
+    @Test
+    public void testFindUserByEmail() {
         User u = new User();
+        u.setEmail("abc@correo.com");
         userFacade.create(u);
-        User result =  userFacade.findUserByEmail(u.getEmail());
+        User result = userFacade.findUserByEmail(u.getEmail());
         assertEquals(result, u);
     }
-    
 
 }
