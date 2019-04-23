@@ -62,8 +62,8 @@ public class TagSynonym implements Serializable {
         this.tagSynonym = tagSynonym;
     }
 
-    public Tag getTagId() {
-        return tagId;
+    public Integer getTagId() {
+        return tagId.getId();
     }
 
     public void setTagId(Tag tagId) {

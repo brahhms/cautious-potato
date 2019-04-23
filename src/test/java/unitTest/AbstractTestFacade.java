@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
  * @author abraham
  * @param <T>
  */
+
 public abstract class AbstractTestFacade<T> {
 
     @Mock

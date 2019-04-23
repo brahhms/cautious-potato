@@ -30,7 +30,8 @@ import javax.validation.constraints.Size;
 @Table(catalog = "QxA", schema = "", name = "Post")
 @NamedQueries({
     @NamedQuery(name = "Post.findByParentId", query = "SELECT p FROM Post p WHERE p.parentId = :parentId"),
-    @NamedQuery(name = "Post.findByPostTypeId", query = "SELECT p FROM Post p WHERE p.postTypeId = :postTypeId")})
+    @NamedQuery(name = "Post.findByPostTypeId", query = "SELECT p FROM Post p WHERE p.postTypeId = :postTypeId")
+})
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -199,16 +200,16 @@ public class Post implements Serializable {
         this.parentId = parentId;
     }
 
-    public PostType getPostTypeId() {
-        return postTypeId;
+    public Integer getPostTypeId() {
+        return postTypeId.getId();
     }
 
     public void setPostTypeId(PostType postTypeId) {
         this.postTypeId = postTypeId;
     }
 
-    public User getOwnerUserId() {
-        return ownerUserId;
+    public Integer getOwnerUserId() {
+        return ownerUserId.getId();
     }
 
     public void setOwnerUserId(User ownerUserId) {

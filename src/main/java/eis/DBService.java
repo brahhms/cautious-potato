@@ -1,10 +1,16 @@
 package eis;
 
+import domain.Post;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 
 /**
@@ -39,6 +45,10 @@ public class DBService {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return em.createQuery(cq).getResultList();
+    }
+
+    public void edit(Object rowData) {
+        em.merge(rowData);
     }
 
 }

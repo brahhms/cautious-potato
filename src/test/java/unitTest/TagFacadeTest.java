@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
  *
  * @author abraham
  */
+
 @RunWith(MockitoJUnitRunner.class)
 public class TagFacadeTest extends AbstractTestFacade<Tag> {
 

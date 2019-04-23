@@ -122,6 +122,11 @@ public class User implements Serializable {
         this.reputation = reputation;
     }
 
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+    
+    
     public List<Vote> getVoteList() {
         return voteList;
     }
@@ -157,6 +162,8 @@ public class User implements Serializable {
         }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {

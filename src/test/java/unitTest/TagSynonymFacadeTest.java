@@ -3,6 +3,7 @@ package unitTest;
 import domain.TagSynonym;
 import eis.AbstractFacade;
 import eis.TagSynonymFacade;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
