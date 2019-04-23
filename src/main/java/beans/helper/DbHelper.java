@@ -2,9 +2,7 @@ package beans.helper;
 
 import eis.DBService;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -12,11 +10,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
 import javax.inject.Named;
-import javax.persistence.metamodel.Attribute;
 import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.SingularAttribute;
 import org.primefaces.component.datatable.DataTable;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 @Named
@@ -25,11 +20,12 @@ public class DbHelper implements Serializable {
 
     @Inject
     private DBService service;
-
     private List<String> entities;
+
     private EntityType<?> ent;
-    private List records;
     private String entityName;
+
+    private List records;
 
     @PostConstruct
     public void init() {
@@ -68,14 +64,21 @@ public class DbHelper implements Serializable {
     }
 
     public void onRowEdit(RowEditEvent event) {
-       
 
         FacesMessage msg = new FacesMessage("Object Edited", event.getObject().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        
+
         DataTable table = (DataTable) event.getSource();
         service.edit(table.getRowData());
     }
 
+    public void onAddNew() throws InstantiationException, IllegalAccessException {
+
+        Object row = ent.getJavaType().newInstance();
+        //service.create(row);
+        records.add(row);
+        FacesMessage msg = new FacesMessage("New Car added", records.size()+"" );
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 }

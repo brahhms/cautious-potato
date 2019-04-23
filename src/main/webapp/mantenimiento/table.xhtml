@@ -6,6 +6,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
                 >
 
     <ui:define name="metadata">
@@ -21,7 +22,7 @@
 
             <p:growl id="msgs" showDetail="true"/>
 
-            <p:dataTable id="records" var="record" value="#{dbHelper.records}" editable="true" >                    
+            <p:dataTable id="records"  widgetVar="records" var="record" value="#{dbHelper.records}" editable="true" >                    
 
                 <p:ajax event="rowEdit" listener="#{dbHelper.onRowEdit}" update=":form:msgs" />
 
@@ -39,7 +40,7 @@
                         <f:facet name="output">                       
                             <h:outputText value='#{cell}' />    
                         </f:facet>
-                        
+
                         <f:facet name="input">
                             <p:inputText value="#{cell}" rendered='#{!column.javaType.name.contains("Date")}' style="width:100%"/>     
                             <p:calendar value="#{cell}" rendered='#{column.javaType.name.contains("Date")}'/>
@@ -52,6 +53,12 @@
                 </p:column>
 
             </p:dataTable>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p:commandButton value="Add new row" styleClass="ui-priority-primary" process="@this" update=":form:msgs"
+                                     action="#{dbHelper.onAddNew()}" oncomplete="PF('records').addRow();"/>
+                </div>
+            </div>
 
 
         </h:form>
