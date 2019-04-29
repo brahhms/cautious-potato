@@ -200,16 +200,16 @@ public class Post implements Serializable {
         this.parentId = parentId;
     }
 
-    public Integer getPostTypeId() {
-        return postTypeId.getId();
+    public PostType getPostTypeId() {
+        return postTypeId;
     }
 
     public void setPostTypeId(PostType postTypeId) {
         this.postTypeId = postTypeId;
     }
 
-    public Integer getOwnerUserId() {
-        return ownerUserId.getId();
+    public User getOwnerUserId() {
+        return ownerUserId;
     }
 
     public void setOwnerUserId(User ownerUserId) {

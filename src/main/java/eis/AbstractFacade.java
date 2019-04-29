@@ -1,11 +1,14 @@
 package eis;
 
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
+import javax.persistence.metamodel.SingularAttribute;
 
 /**
  *
  * @author abraham
+ * @param <T>
  */
 public abstract class AbstractFacade<T> {
 
@@ -54,6 +57,16 @@ public abstract class AbstractFacade<T> {
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+    
+    public Set<SingularAttribute<T, ?>> getAttributes(){
+        Set<SingularAttribute<T, ?>> attributes = 
+                getEntityManager()
+                        .getMetamodel()
+                        .entity(entityClass)
+                        .getDeclaredSingularAttributes();
+        
+        return attributes;
     }
     
 }

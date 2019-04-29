@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="entitiesTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cp="http://xmlns.jcp.org/jsf/composite/components"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <cp:tableView bean="#{voteView}" header="Vote" update="@form">
+
+                <p:panelGrid  columns="2" columnClasses="label,value">
+
+                    <h:outputText value="Id:" />
+                    <p:inputText value="#{voteView.object.id}" />
+
+                    <h:outputText value="postId:" />
+                    <p:selectOneMenu value="#{voteView.object.postId}" immediate="true" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItems value="#{voteView.posts}" var="post" itemLabel='#{post.id.toString()
+                                                .concat(" - ")
+                                                .concat( post.title eq null or post.title eq ""? post.postTypeId.name.concat(" from ").concat(post.parentId.id) : post.title )}'
+                                       itemValue="#{post}" />
+                    </p:selectOneMenu>
+
+                    <h:outputText value="userId:" />
+                    <p:selectOneMenu value="#{voteView.object.userId}" immediate="true" converter="omnifaces.SelectItemsConverter" >
+                        <f:selectItems value="#{voteView.users}" var="user" itemLabel="#{user.displayName}" itemValue="#{user}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="voteTypeId:" />
+                    <p:selectOneMenu value="#{voteView.object.voteTypeId}" immediate="true" converter="omnifaces.SelectItemsConverter" >
+                        <f:selectItems value="#{voteView.voteTypes}" var="voteType" itemLabel="#{voteType.name}" itemValue="#{voteType}"/>
+                    </p:selectOneMenu>
+
+
+                </p:panelGrid>
+
+                <f:facet name="footer">
+                    <cp:btnPanel bean="#{voteView}" update="@form"/>
+                </f:facet>
+
+            </cp:tableView>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="entitiesTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:cp="http://xmlns.jcp.org/jsf/composite/components"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+            <cp:tableView bean="#{tagSynonymView}" header="Tag Synonym" update="@form">
+                
+                <p:panelGrid  columns="2" columnClasses="label,value">
+
+                    <h:outputText value="Id:" />
+                    <p:inputText value="#{tagSynonymView.object.id}" />
+
+                    <h:outputText value="TagId:" />
+                    <p:selectOneMenu value="#{tagSynonymView.object.tagId}" converter="omnifaces.SelectItemsConverter" >
+                        <f:selectItems value="#{tagSynonymView.tags}" var="t" itemLabel="#{t.name}" itemValue="#{t}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputText value="TagSynonym:" />
+                    <p:inputText value="#{tagSynonymView.object.tagSynonym}" />
+             
+              
+                </p:panelGrid>
+                
+                <f:facet name="footer">
+                    <cp:btnPanel bean="#{tagSynonymView}" update="@form"/>
+                </f:facet>
+                
+            </cp:tableView>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,67 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:cc="http://java.sun.com/jsf/composite"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:p="http://primefaces.org/ui"
+              xmlns:h="http://xmlns.jcp.org/jsf/html"
+              xmlns:f="http://xmlns.jcp.org/jsf/core"
+              xmlns:cp="http://xmlns.jcp.org/jsf/composite/components"
+              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <cc:interface>
+        <cc:attribute name="bean" 
+                      required="true"/>
+        <cc:attribute name="header" 
+                      required="true"/>
+        <cc:attribute name="update" 
+                      required="true"/>
+
+    </cc:interface>
+
+    <cc:implementation>
+
+        <p:dataTable id="tbl" var="record"              
+                     value="#{cc.attrs.bean.lazyModel}" 
+                     selectionMode="single" selection="#{cc.attrs.bean.object}" rowKey="#{record.id}"
+                     paginator="true" rows="5"
+                     rowsPerPageTemplate="5,10,15"   lazy="true" widgetVar="tbl" 
+                     paginatorPosition="bottom" sortBy="#{record.id}">
+
+            <f:facet name="header">
+                #{cc.attrs.header}
+            </f:facet>
+
+            <p:columns value="#{cc.attrs.bean.attributes}" var="attr" >
+                <c:set var="columnName" value="#{attr.name}"/> 
+                <c:set var="type" value="#{attr.javaType.name}"/>
+                <c:set var="columnValue" value="#{record[columnName]}"/>
+                <c:set var="valueLength" value="#{columnValue.toString().length()}"/>
+
+                <f:facet name="header">
+                    <h:outputText value="#{columnName}" />
+                </f:facet>
+
+                <h:outputText value="#{columnValue}" rendered='#{!type.contains("domain") and valueLength le 45}' />
+                <h:outputText value='#{columnValue.toString().substring(0, 42).concat("...")}' rendered='#{!type.contains("domain") and valueLength gt 45}' />
+                <h:outputText value="#{columnValue.id}" rendered='#{type.contains("domain")}'/>
+
+            </p:columns>
+
+            <p:ajax event="rowSelect" listener="#{cc.attrs.bean.onRowSelect}" update="#{cc.attrs.update}" oncomplete="PF('ptDialog').show()" />
+
+        </p:dataTable>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <p:commandButton value="Add new record" styleClass="ui-priority-primary" oncomplete="PF('ptDialog').show()"/>
+            </div>
+        </div>
+
+        <p:dialog id="dialog" header="#{cc.attrs.header}" widgetVar="ptDialog" modal="true" closable="false" showEffect="fade" hideEffect="fade" resizable="false">
+            <cc:insertChildren />
+            <f:facet name="footer">
+                <cp:btnPanel bean="#{cc.attrs.bean}" update="#{cc.attrs.update}"/>
+            </f:facet>
+        </p:dialog>
+
+    </cc:implementation>
+</ui:component>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <!-- INTERFACE -->
+    <composite:interface>
+        <composite:attribute name="bean" 
+                             shortDescription="Bean a implementar"
+                             required="true"/>
+        <composite:attribute name="update"
+                             shortDescription="actualizar"
+                             required="true"/>
+
+
+    </composite:interface>
+
+
+    <!-- IMPLEMENTATION -->
+    <composite:implementation>
+
+        <p:toolbar >
+            <f:facet name="right" >
+                <c:set var="isEmpty" value="#{cc.attrs.bean.getObject().id==null}"/>
+                <p:commandButton value="Save" 
+                                 action="#{cc.attrs.bean.newRecord()}"
+                                 icon="pi pi-save"
+                                 update="#{cc.attrs.update}"
+                                 rendered="#{isEmpty}"
+                                 />
+                <p:commandButton value="Update"
+                                 action="#{cc.attrs.bean.updateRecord()}"
+                                 icon="pi pi-refresh" 
+                                 update="#{cc.attrs.update}"
+                                 rendered="#{!isEmpty}"
+                                 />
+                <p:commandButton value="Delete"
+                                 action="#{cc.attrs.bean.removeRecord()}"
+                                 icon="pi pi-times" 
+                                 update="#{cc.attrs.update}"
+                                 rendered="#{!isEmpty}"
+                                 />
+                <p:commandButton value="Cancel"
+                                 action="#{cc.attrs.bean.clearObject()}"
+                                 icon="pi pi-times" 
+                                 update="#{cc.attrs.update}"
+                                 />
+            </f:facet>
+        </p:toolbar>
+
+    </composite:implementation>
+
+
+</html>
+
