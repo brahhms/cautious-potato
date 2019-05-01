@@ -2,7 +2,7 @@ package beans.helper;
 
 import domain.Post;
 import domain.PostType;
-import domain.User;
+import domain.Usuario;
 import eis.PostFacade;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -33,7 +33,7 @@ public class QuestionHelper implements Serializable {
         answer.setPostTypeId(new PostType(ANSWER_TYPE));
         answer.setParentId(question);
         answer.setOwnerDisplayName("naruto");
-        answer.setOwnerUserId(new User(1));
+        answer.setOwnerUserId(new Usuario(1));
         service.create(answer);
         question.getPostChildren().add(answer);
     }

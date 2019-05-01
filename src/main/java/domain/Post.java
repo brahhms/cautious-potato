@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,8 +47,7 @@ public class Post implements Serializable {
     @Size(min = 1, max = 2000)
     private String body;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Column(name = "ownerDisplayName", length = 45, nullable=false)
     private String ownerDisplayName;
     @Size(min = 1, max = 128)
     private String title;
@@ -69,11 +69,11 @@ public class Post implements Serializable {
     @ManyToOne
     private Post parentId;
     @JoinColumn(name = "postTypeId", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private PostType postTypeId;
     @JoinColumn(name = "ownerUserId", referencedColumnName = "id")
     @ManyToOne
-    private User ownerUserId;
+    private Usuario ownerUserId;
 
     public Post() {
     }
@@ -83,7 +83,7 @@ public class Post implements Serializable {
     }
 
     //question
-    public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, User ownerUserId) {
+    public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, Usuario ownerUserId) {
         this.id = id;
         this.body = body;
         this.ownerDisplayName = ownerDisplayName;
@@ -208,11 +208,11 @@ public class Post implements Serializable {
         this.postTypeId = postTypeId;
     }
 
-    public User getOwnerUserId() {
+    public Usuario getOwnerUserId() {
         return ownerUserId;
     }
 
-    public void setOwnerUserId(User ownerUserId) {
+    public void setOwnerUserId(Usuario ownerUserId) {
         this.ownerUserId = ownerUserId;
     }
 

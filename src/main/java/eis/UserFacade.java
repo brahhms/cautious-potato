@@ -1,6 +1,6 @@
 package eis;
 
-import domain.User;
+import domain.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
  * @author abraham
  */
 @Stateless
-public class UserFacade extends AbstractFacade<User> {
+public class UserFacade extends AbstractFacade<Usuario> {
 
     @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
@@ -25,18 +25,18 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public UserFacade() {
-        super(User.class);
+        super(Usuario.class);
     }
 
 
-    public User findUserByEmail(String email) {
+    public Usuario findUserByEmail(String email) {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
-        Root<User> fromUser = cq.from(User.class);
+        Root<Usuario> fromUser = cq.from(Usuario.class);
         cq.select(fromUser)
                 .where(cb.equal(fromUser.get("email"),email ));
 
-        TypedQuery<User> tq = em.createQuery(cq);
+        TypedQuery<Usuario> tq = em.createQuery(cq);
 
         return  tq.getSingleResult();
 

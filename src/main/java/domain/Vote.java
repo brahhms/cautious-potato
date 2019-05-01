@@ -29,7 +29,7 @@ public class Vote implements Serializable {
     private Post postId;
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @ManyToOne
-    private User userId;
+    private Usuario userId;
     @JoinColumn(name = "voteTypeId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private VoteType voteTypeId;
@@ -57,11 +57,11 @@ public class Vote implements Serializable {
         this.postId = postId;
     }
 
-    public User getUserId() {
+    public Usuario getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(Usuario userId) {
         this.userId = userId;
     }
 

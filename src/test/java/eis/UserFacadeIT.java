@@ -1,36 +1,44 @@
 package eis;
 
-import domain.User;
-import static org.junit.Assert.assertEquals;
-import org.junit.Rule;
-import org.junit.Test;
+import domain.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import org.jboss.arquillian.junit.Arquillian;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author abraham
  */
-public class UserFacadeIT extends AbstractTestFacade<User> {
+@RunWith(Arquillian.class)
+public class UserFacadeIT extends AbstractTest<Usuario> {
 
-    private final UserFacade userFacade = new UserFacade();
-    @Rule
-    public EntityManagerProvider emp = EntityManagerProvider.getInstance("potatoPU-test", userFacade);
-      
+    @Inject
+    private UserFacade cut;
+    List<Usuario> datos = new ArrayList<>();
+
     public UserFacadeIT() {
-        super(User.class, new User());
+        datos.add(new Usuario(1, "displayName", "email") );
+        datos.add(new Usuario(5, "displayUserName", "e-mail") );
+        datos.add(new Usuario(1, "displayName", "email"));
+        this.idNuevo = 5;
     }
 
     @Override
-    public AbstractFacade facade() {
-        return emp.getFacade();
+    protected AbstractFacade facade() {
+        return cut;
     }
 
-    @Test
-    public void testFindUserByEmail() {
-        User u = new User();
-        u.setEmail("abc@correo.com");
-        userFacade.create(u);
-        User result = userFacade.findUserByEmail(u.getEmail());
-        assertEquals(result, u);
+    @Override
+    protected List<Usuario> getRegistros() {
+        return datos;
+
     }
-     
+
+    @Override
+    protected Object getId() {
+        return entity.getId();
+    }
+
 }

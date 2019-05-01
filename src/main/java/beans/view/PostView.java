@@ -1,9 +1,14 @@
 package beans.view;
 
 import domain.Post;
+import domain.PostType;
+import domain.Usuario;
 import eis.AbstractFacade;
 import eis.PostFacade;
+import eis.PostTypeFacade;
+import eis.UserFacade;
 import java.io.Serializable;
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -21,6 +26,12 @@ public class PostView extends AbstractView<Post> implements Serializable {
 
     @Inject
     private PostFacade facade;
+    @Inject
+    private PostTypeFacade postTypeFacade;
+    @Inject
+    private UserFacade userFacade;
+    private final int QUESTION = 1;
+    private final int ANSWERS = 2;
 
     @PostConstruct
     public void init() {
@@ -34,7 +45,7 @@ public class PostView extends AbstractView<Post> implements Serializable {
 
     @Override
     public Post getObject() {
-        if (this.object== null) {
+        if (this.object == null) {
             this.object = new Post();
         }
         return this.object;
@@ -54,4 +65,22 @@ public class PostView extends AbstractView<Post> implements Serializable {
         return null;
     }
 
+
+    
+    public List<PostType> getTypes(){
+        return postTypeFacade.findAll();
+    }
+    public List<Usuario> getUsers(){
+        return userFacade.findAll();
+    }
+    public List<Post> getQuestions(){
+        return facade.findPostByType(QUESTION);
+    }
+    public List<Post> getAnswers(){
+        return facade.findPostByType(ANSWERS);
+    }
+    public void onOwnerChange(){
+        this.object.setOwnerDisplayName(this.object.getOwnerUserId().getDisplayName());
+    }
+    
 }

@@ -6,56 +6,89 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:cp="http://xmlns.jcp.org/jsf/composite/components"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
 
         <h:form id="form">
             <cp:tableView bean="#{postView}" header="Post" update="@form">
 
-                <p:panelGrid  columns="2" columnClasses="label,value">
+                <p:panel id="panel">
+                    <c:set var="postType" value="#{postView.object.postTypeId}" />
+                    <c:set var="question" value="1" />
+                    <c:set var="answer" value="2" />
 
-                    <h:outputText value="Id:" />
-                    <p:inputText value="#{postView.object.id}" />
+                    <p:panelGrid class="ui-g-6" columns="2">    
+                        <h:outputText value="postTypeId:" />
+                        <p:selectOneMenu value="#{postType}" converter="omnifaces.SelectItemsConverter" >
+                            <p:ajax event="valueChange" update="panel" />
+                            <f:selectItems value="#{postView.types}" var="t" itemLabel="#{t.name}" itemValue="#{t}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
 
-                    <h:outputText value="postTypeId:" />
-                    <p:selectOneMenu value="#{postView.object.postTypeId}" />
+                    <p:panelGrid class="ui-g-6" columns="2" >                    
+                        <h:outputText value="Id:" />
+                        <p:inputText  value="#{postView.object.id}" />
+                    </p:panelGrid>
 
-                    <h:outputText value="acceptedAnswerId:" />
-                    <p:selectOneMenu value="#{postView.object.acceptedAnswerId}" />
+                    <p:panelGrid class="ui-g-6" columns="2" rendered="#{postType.id eq question}" > 
+                        <h:outputText value="acceptedAnswerId:" />
+                        <p:selectOneMenu value="#{postView.object.acceptedAnswerId}" converter="omnifaces.SelectItemsConverter" >
+                            <f:selectItem itemLabel="null" itemValue="#{null}" />
+                            <f:selectItems value="#{postView.answers}" var="a" itemLabel="#{a.id.toString()}" itemValue="#{a}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
 
-                    <h:outputText value="parentId:" />
-                    <p:selectOneMenu value="#{postView.object.parentId}" />
+                    <p:panelGrid class="ui-g-6" columns="2" rendered="#{postType.id eq answer}" >  
+                        <h:outputText value="parentId:" />
+                        <p:selectOneMenu value="#{postView.object.parentId}" converter="omnifaces.SelectItemsConverter">
+                            <f:selectItems value="#{postView.questions}" var="q" itemLabel="#{q.title}" itemValue="#{q}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
 
-                    <h:outputText value="creationDate:" />
-                    <p:calendar value="#{postView.object.creationDate}" />
+                    <p:panelGrid class="ui-g-6" columns="2">  
+                        <h:outputText value="creationDate:" />
+                        <p:calendar value="#{postView.object.creationDate}" />
+                    </p:panelGrid>
 
-                    <h:outputText value="Body:" />
-                    <p:textEditor  height="100" value="#{postView.object.body}" >
-                        <f:facet name="toolbar">
-                            <span class="ql-formats">
-                                <button class="ql-bold"></button>
-                                <button class="ql-italic"></button>
-                                <button class="ql-underline"></button>
-                                <button class="ql-strike"></button>
-                            </span>
-                            <span class="ql-formats">
-                                <select class="ql-font"></select>
-                                <select class="ql-size"></select>
-                            </span>
-                        </f:facet>
-                    </p:textEditor>
+                    <p:panelGrid class="ui-g-6" columns="2"> 
+                        <h:outputText value="Body:" />
+                        <p:textEditor  height="100" value="#{postView.object.body}" >
+                            <f:facet name="toolbar">
+                                <span class="ql-formats">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-strike"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-font"></select>
+                                    <select class="ql-size"></select>
+                                </span>
+                            </f:facet>
+                        </p:textEditor>
+                    </p:panelGrid>
 
-                    <h:outputText value="ownerUserId" />
-                    <p:selectOneMenu value="#{postView.object.ownerUserId}" />
+                    <p:panelGrid class="ui-g-6" columns="2"> 
+                        <h:outputText value="ownerUserId" />
+                        <p:selectOneMenu value="#{postView.object.ownerUserId}" converter="omnifaces.SelectItemsConverter" >
+                            <p:ajax event="valueChange" listener="#{postView.onOwnerChange()}" update="displayName" />
+                            <f:selectItems value="#{postView.users}" var="u" itemLabel="#{u.displayName}" itemValue="#{u}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
 
-                    <h:outputText value="ownerDisplayMame" />
-                    <p:inputText value="#{postView.object.ownerDisplayName}"/>
+                    <p:panelGrid class="ui-g-6" columns="2" id="displayName"> 
+                        <h:outputText value="ownerDisplayMame" />
+                        <h:inputText disabled="true" value="#{postView.object.ownerDisplayName}"/>
+                    </p:panelGrid>
 
-                    <h:outputText value="Title:" />
-                    <p:inputText value="#{postView.object.title}"/>
+                    <p:panelGrid class="ui-g-6" columns="2" rendered="#{postType.id eq question}" >   
+                        <h:outputText value="Title:"  />
+                        <p:inputText value="#{postView.object.title}" />
+                    </p:panelGrid>
 
-                </p:panelGrid>
+                </p:panel>
 
                 <f:facet name="footer">
                     <cp:btnPanel bean="#{postView}" update="@form"/>

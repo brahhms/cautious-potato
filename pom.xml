@@ -16,9 +16,44 @@
         <powermock.version>1.5.2</powermock.version>
     </properties>
     
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.4.1.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     
     <dependencies>
-
+        <!-- Arquilian-->
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-persistence-dbunit</artifactId>
+            <version>1.0.0.Alpha7</version>
+            <scope>test</scope>
+        </dependency>
+    
+        <!-- /Arquilian-->
+        
+        <!-- Mysql driver-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.41</version>
+        </dependency>
+        <!-- /Mysql driver -->
+        
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
@@ -30,11 +65,11 @@
             <artifactId>primefaces</artifactId>
             <version>7.0</version>
         </dependency>
-<dependency>
-    <groupId>org.omnifaces</groupId>
-    <artifactId>omnifaces</artifactId>
-    <version>3.0</version>
-</dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>3.0</version>
+        </dependency>
 
 
         <dependency>
@@ -62,12 +97,7 @@
             <version>2.2</version>
         </dependency>
         
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.41</version>
-        </dependency>
- 
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -94,22 +124,8 @@
             <scope>test</scope>
         </dependency>
         
-        <!--dependencias derby-->
-        <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.14.1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.6.6</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--****************************-->
-
     </dependencies>
+
 
     <build>
         <plugins>
@@ -187,6 +203,7 @@
      
     </build>
     <repositories>
+
         <repository>
             <url>http://repository.primefaces.org/</url>
             <id>PrimeFaces-maven-lib</id>
@@ -195,14 +212,36 @@
         </repository>
     </repositories>
     <profiles>
+
+        
+ 
+        <!-- arquillian-glassfish-embedded - profile -->
         <profile>
-            <id>failsafe</id>
+            <id>arquillian-glassfish-embedded</id>            
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+                    <version>1.0.0.Final</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.glassfish.main.extras</groupId>
+                    <artifactId>glassfish-embedded-web</artifactId>
+                    <version>5.0</version>
+                </dependency>
+            </dependencies>
             <build>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources</directory>
+                    </testResource>
+                    
+                </testResources>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.19</version>
+                        <version>2.22.1</version>
                         <configuration>
                             <includes>
                                 <include>**/*IT.java</include>
@@ -223,6 +262,8 @@
                 </plugins>
             </build>
         </profile>
+        <!-- arquillian-glassfish-embedded - profile -->
+
     </profiles>
     
 </project>

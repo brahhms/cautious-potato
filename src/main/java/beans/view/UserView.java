@@ -1,6 +1,6 @@
 package beans.view;
 
-import domain.User;
+import domain.Usuario;
 import eis.AbstractFacade;
 import eis.UserFacade;
 import java.io.Serializable;
@@ -17,14 +17,14 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class UserView extends AbstractView<User> implements Serializable {
+public class UserView extends AbstractView<Usuario> implements Serializable {
 
     @Inject
     private UserFacade facade;
 
     @PostConstruct
     public void init() {
-        super.init(new User());
+        super.init(new Usuario());
     }
 
     @Override
@@ -33,20 +33,20 @@ public class UserView extends AbstractView<User> implements Serializable {
     }
 
     @Override
-    public User getObject() {
+    public Usuario getObject() {
         if (this.object== null) {
-            this.object = new User();
+            this.object = new Usuario();
         }
         return this.object;
     }
 
     @Override
-    protected Object rowKey(User entity) {
+    protected Object rowKey(Usuario entity) {
         return entity.getId();
     }
 
     @Override
-    protected User getRData(String rowKey) {
+    protected Usuario getRData(String rowKey) {
         if (rowKey != null && !rowKey.isEmpty() && this.getLazyModel().getWrappedData() != null) {
             return this.getLazyModel().getWrappedData().stream().
                     filter(tp -> tp.getId().toString().compareTo(rowKey) == 0).collect(Collectors.toList()).get(0);

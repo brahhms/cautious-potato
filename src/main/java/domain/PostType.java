@@ -24,10 +24,10 @@ public class PostType implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "name", length = 45)
+
+    @Column(name = "name", length = 45, nullable=false)
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postTypeId")
     private List<Post> postList;

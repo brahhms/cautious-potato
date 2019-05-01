@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Sat Apr 27 21:35:49 CST 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-016a-6203-5fe7-00000430adb8 
-on database directory memory:/home/abraham/Documentos/CautiousPotato/testDB with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/home/abraham/.m2/repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
+Wed May 01 11:24:19 CST 2019:
+ Iniciando instancia a816c00e-016a-746c-f703-0000111b7d90 de Derby, versión The Apache Software Foundation - Apache Derby - 10.13.1.1 - (Unversioned directory): 
+en el directorio de base de datos /home/abraham/Documentos/CautiousPotato/target/databases/derby con el cargador de clases sun.misc.Launcher$AppClassLoader@18b4aac2
+Cargado desde file:/home/abraham/.m2/repository/org/glassfish/main/extras/glassfish-embedded-web/5.0/glassfish-embedded-web-5.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_131-b11
 user.dir=/home/abraham/Documentos/CautiousPotato
 os.name=Linux
 os.arch=amd64
-os.version=4.9.0-8-amd64
+os.version=4.9.0-9-amd64
 derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
+Cargador de clases de base de datos iniciado - derby.database.classpath=''

@@ -1,0 +1,43 @@
+{
+    "VoteType": [
+        {
+            "id": 1,
+            "name": "up"
+        },
+        {
+            "id": 2,
+            "name": "down"
+        }
+
+    ],
+    "Post": [
+        {
+             "id":1
+        }
+    ],
+    "PostType": [
+        {
+             "id":1
+        }
+    ],
+    "Tag": [
+        {
+             "id":1
+        }
+    ],
+    "TagSynonym": [
+        {
+             "id":1
+        }
+    ],
+    "User": [
+        {
+             "id":1
+        }
+    ],
+    "Vote": [
+        {
+             "id":1
+        }
+    ]
+}
