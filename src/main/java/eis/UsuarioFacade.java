@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
  * @author abraham
  */
 @Stateless
-public class UserFacade extends AbstractFacade<Usuario> {
+public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     @PersistenceContext(unitName = "potatoPU")
     private EntityManager em;
@@ -24,7 +24,7 @@ public class UserFacade extends AbstractFacade<Usuario> {
         return em;
     }
 
-    public UserFacade() {
+    public UsuarioFacade() {
         super(Usuario.class);
     }
 

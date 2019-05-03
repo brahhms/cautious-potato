@@ -6,7 +6,7 @@ import domain.Usuario;
 import eis.AbstractFacade;
 import eis.PostFacade;
 import eis.PostTypeFacade;
-import eis.UserFacade;
+import eis.UsuarioFacade;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ public class PostView extends AbstractView<Post> implements Serializable {
     @Inject
     private PostTypeFacade postTypeFacade;
     @Inject
-    private UserFacade userFacade;
+    private UsuarioFacade userFacade;
     private final int QUESTION = 1;
     private final int ANSWERS = 2;
 

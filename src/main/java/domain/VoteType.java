@@ -3,6 +3,7 @@ package domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
-@Table(catalog = "QxA", schema = "",name = "VoteType")
+@Table(name = "VoteType")
 public class VoteType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,17 +77,27 @@ public class VoteType implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VoteType)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        VoteType other = (VoteType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VoteType other = (VoteType) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+
+
 
     @Override
     public String toString() {

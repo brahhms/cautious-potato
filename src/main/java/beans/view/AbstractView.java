@@ -16,6 +16,7 @@ import org.primefaces.model.LazyDataModel;
  * @author abraham
  * @param <T>
  */
+
 public abstract class AbstractView<T> implements Serializable{
 
     protected T object;

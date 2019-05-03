@@ -2,6 +2,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
-@Table(catalog = "QxA", schema = "",name = "TagSynonym")
+@Table(name = "TagSynonym")
 public class TagSynonym implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,18 +79,31 @@ public class TagSynonym implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TagSynonym)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        TagSynonym other = (TagSynonym) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TagSynonym other = (TagSynonym) obj;
+        if (!Objects.equals(this.tagSynonym, other.tagSynonym)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.tagId, other.tagId)) {
             return false;
         }
         return true;
     }
 
+
+    
     @Override
     public String toString() {
         return "TagSynonym{" + "id=" + getId() + ", tagSynonym=" + getTagSynonym() + ", tagId=" + getTagId() + '}';

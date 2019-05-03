@@ -3,7 +3,7 @@ package beans.view;
 import domain.Vote;
 import eis.AbstractFacade;
 import eis.PostFacade;
-import eis.UserFacade;
+import eis.UsuarioFacade;
 import eis.VoteFacade;
 import eis.VoteTypeFacade;
 import java.io.Serializable;
@@ -28,7 +28,7 @@ public class VoteView extends AbstractView<Vote> implements Serializable {
     @Inject
     private PostFacade postFacade;
     @Inject
-    private UserFacade userFacade;
+    private UsuarioFacade userFacade;
     @Inject
     private VoteTypeFacade voteTypeFacade;
 

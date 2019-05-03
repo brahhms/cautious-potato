@@ -2,7 +2,7 @@ package beans.view;
 
 import domain.Usuario;
 import eis.AbstractFacade;
-import eis.UserFacade;
+import eis.UsuarioFacade;
 import java.io.Serializable;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
@@ -20,7 +20,7 @@ import javax.inject.Named;
 public class UserView extends AbstractView<Usuario> implements Serializable {
 
     @Inject
-    private UserFacade facade;
+    private UsuarioFacade facade;
 
     @PostConstruct
     public void init() {

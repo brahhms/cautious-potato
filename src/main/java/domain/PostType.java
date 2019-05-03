@@ -3,6 +3,7 @@ package domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotNull;
  * @author abraham
  */
 @Entity
-@Table(catalog = "QxA", schema = "",name = "PostType")
+@Table(name = "PostType")
 public class PostType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,17 +77,27 @@ public class PostType implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PostType)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        PostType other = (PostType) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PostType other = (PostType) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+
+
 
     @Override
     public String toString() {

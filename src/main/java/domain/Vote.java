@@ -2,7 +2,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,7 @@ import javax.persistence.Table;
  * @author abraham
  */
 @Entity
-@Table(catalog = "QxA", schema = "",name = "Vote")
+@Table(name = "Vote")
 public class Vote implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,13 +27,13 @@ public class Vote implements Serializable {
     @Basic(optional = false)
     private Integer id;
     @JoinColumn(name = "postId", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Post postId;
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @ManyToOne
     private Usuario userId;
     @JoinColumn(name = "voteTypeId", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private VoteType voteTypeId;
 
     public Vote() {
@@ -40,6 +42,7 @@ public class Vote implements Serializable {
     public Vote(Integer id) {
         this.id = id;
     }
+    
 
     public Integer getId() {
         return id;
@@ -81,18 +84,34 @@ public class Vote implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vote)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Vote other = (Vote) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vote other = (Vote) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.postId, other.postId)) {
+            return false;
+        }
+        if (!Objects.equals(this.userId, other.userId)) {
+            return false;
+        }
+        if (!Objects.equals(this.voteTypeId, other.voteTypeId)) {
             return false;
         }
         return true;
     }
 
+
+    
     @Override
     public String toString() {
         return "Vote{" + "id=" + getId() + ", postId=" + getPostId() + ", userId=" + getUserId() + ", voteTypeId=" + getVoteTypeId() + '}';

@@ -2,7 +2,7 @@ package unitTest;
 
 import domain.Usuario;
 import eis.AbstractFacade;
-import eis.UserFacade;
+import eis.UsuarioFacade;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -15,7 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class UserFacadeTest extends AbstractTestFacade<Usuario> {
 
     @InjectMocks
-    private UserFacade userFacade;
+    private UsuarioFacade userFacade;
 
     @Override
     public AbstractFacade facade() {

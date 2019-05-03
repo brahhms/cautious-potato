@@ -10,34 +10,91 @@
         }
 
     ],
-    "Post": [
-        {
-             "id":1
-        }
-    ],
     "PostType": [
         {
-             "id":1
+            "id": 1,
+            "name": "question"
+        },
+        {
+            "id": 2,
+            "name": "answer"
         }
     ],
     "Tag": [
         {
-             "id":1
+            "id": 1,
+            "name": "html"
+        },
+        {
+            "id": 2,
+            "name": "css"
         }
     ],
     "TagSynonym": [
         {
-             "id":1
+            "id": "1",
+            "tagId": "1",
+            "tagSynonym": "html5"
+        },
+        {
+            "id": "2",
+            "tagId": "2",
+            "tagSynonym": "css3"
         }
     ],
-    "User": [
+    "Usuario": [
         {
-             "id":1
+            "id": "1",
+            "creationDate": "2019-03-29 00:00:00",
+            "displayName": "root",
+            "ProfileImageUrl": "https:\/\/cdn.iconscout.com\/icon\/free\/png-256\/avatar-372-456324.png",
+            "email": "abrahamatteo@gmail.com",
+            "status": "1",
+            "reputation": "1000"
+        },
+        {
+            "id": "2",
+            "creationDate": "2019-04-09 00:00:00",
+            "displayName": "naruto",
+            "ProfileImageUrl": "https:\/\/i.pinimg.com\/236x\/f6\/90\/99\/f6909961fda58ad2c99dec5d29ecdf80--avatar-naruto-series.jpg",
+            "email": "narutoUzumaki@hotmail.com",
+            "status": "1",
+            "reputation": "500"
         }
     ],
-    "Vote": [
+    "Post": [
         {
-             "id":1
+            "id": "1",
+            "postTypeId": "1",
+            "creationDate": "2019-04-01 00:00:00",
+            "body": "<p>necesito centrar un div dentro de otro div<\/p>",
+            "ownerUserId": "1",
+            "ownerDisplayName": "root",
+            "title": "centrar div"
+        },
+        {
+            "id": "2",
+            "postTypeId": "2",
+            "parentId": "1",
+            "creationDate": "2019-04-07 17:49:27",
+            "body": "la respuesta esta en tu corazon",
+            "ownerUserId": "1",
+            "ownerDisplayName": "root",
+            "title": "titulo respuesta"
+        }
+    ],
+        "Vote": [
+        {
+            "id": "1",
+            "postId": "1",
+            "userId": "1",
+            "voteTypeId": "1"
+        },
+        {
+            "id": "2",
+            "postId": "2",
+            "userId": "2",
+            "voteTypeId": "2"
         }
     ]
 }

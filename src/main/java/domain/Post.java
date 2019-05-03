@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ import javax.validation.constraints.Size;
  * @author abraham
  */
 @Entity
-@Table(catalog = "QxA", schema = "", name = "Post")
+@Table(name = "Post")
 @NamedQueries({
     @NamedQuery(name = "Post.findByParentId", query = "SELECT p FROM Post p WHERE p.parentId = :parentId"),
     @NamedQuery(name = "Post.findByPostTypeId", query = "SELECT p FROM Post p WHERE p.postTypeId = :postTypeId")
@@ -82,24 +83,13 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    //question
-    public Post(Integer id, String body, String ownerDisplayName, String title, List<Tag> tagList, Usuario ownerUserId) {
+    public Post(Integer id, String body, String ownerDisplayName) {
         this.id = id;
         this.body = body;
         this.ownerDisplayName = ownerDisplayName;
-        this.title = title;
-        this.tagList = tagList;
-        this.postTypeId = new PostType(1);
-        this.ownerUserId = ownerUserId;
     }
 
-    //answer
-    //comment
-    //de momento no usado
-    public Post(Post parent,int postType) {
-        this.postTypeId = new PostType(postType);
-        this.parentId = parent;
-    }
+
 
     
     
@@ -224,17 +214,36 @@ public class Post implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Post)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Post other = (Post) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Post other = (Post) obj;
+        if (!Objects.equals(this.body, other.body)) {
+            return false;
+        }
+        if (!Objects.equals(this.ownerDisplayName, other.ownerDisplayName)) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.ownerUserId, other.ownerUserId)) {
             return false;
         }
         return true;
     }
+
+
 
     @Override
     public String toString() {
