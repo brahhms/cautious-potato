@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,6 +21,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "VoteType")
+@XmlRootElement
 public class VoteType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +64,7 @@ public class VoteType implements Serializable {
         this.name = name;
     }
 
+    @XmlTransient
     public List<Vote> getVoteList() {
         return voteList;
     }

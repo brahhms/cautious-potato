@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -19,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Vote")
+@XmlRootElement
 public class Vote implements Serializable {
 
     private static final long serialVersionUID = 1L;

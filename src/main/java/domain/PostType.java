@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,6 +21,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "PostType")
+@XmlRootElement
 public class PostType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +64,7 @@ public class PostType implements Serializable {
         this.name = name;
     }
 
+    @XmlTransient
     public List<Post> getPostList() {
         return postList;
     }
